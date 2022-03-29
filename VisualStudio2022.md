@@ -10,9 +10,9 @@
 6. Wait for the installation to finish and Update if there are any updates
 7. When it is installed open it and log in with a microsoft account
 
-![InstallStep1](img/InstallStep1.PNG)
-![InstallStep2](img/InstallStep2.PNG)
-![InstallStep2](img/InstallStep3.PNG)
+![InstallStep1](img/InstallStep1.png)
+![InstallStep2](img/InstallStep2.png)
+![InstallStep2](img/InstallStep3.png)
 
 ## Extra materials
 
