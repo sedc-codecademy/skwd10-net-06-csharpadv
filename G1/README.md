@@ -17,6 +17,9 @@ This repository will contain every piece of material about the subject. It will 
 
 ## Resources for being up to date with C\#
 
+* [How to install Visual Studio 2022]
+> Note: We will be working with the latest version of Visual Studio. You can have both Visual Studio versions on your computer with no problem. Just remember that .NET 5 is not supported in Visual Studio 2019
+
 ### Sites and newsletters
 
 * [C# Weekly Newsletter](https://csharpdigest.net/)
