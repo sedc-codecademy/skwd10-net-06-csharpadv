@@ -212,6 +212,5 @@ Console.WriteLine("=========================================");
 static string GetFullName(string firstName, string lastName)
 {
     return firstName + " " + lastName;
-
 }
 #endregion metod
