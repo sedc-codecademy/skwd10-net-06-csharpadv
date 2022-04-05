@@ -75,5 +75,5 @@ This repository will contain every piece of material about the subject. It will 
 
 ## Contact
 
-* Trainer: trainer@mail.com
-* Assistant: assistant@mail.com
+* Trainer: mihajlo.d96@hotmail.com
+* Assistant: bojandamcevski@yahoo.com
