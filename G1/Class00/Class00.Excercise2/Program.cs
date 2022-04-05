@@ -35,7 +35,9 @@ while (true)
             bool isPasswordCorrect = services.PasswordCheck(student.Password);
             if (!isPasswordCorrect)
             {
-                throw new Exception("Password did not match 3 times. Try again after 30 minutes");
+                Console.WriteLine("You have entered incorrect password three times! The application will close!");
+                //Console.ReadLine();
+                Environment.Exit(0);
             }
             if (student.isQuizzFinished)
             {
