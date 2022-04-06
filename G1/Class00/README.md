@@ -10,7 +10,7 @@ What we have learned in C# Basics
 * Using operators
 * Using string and string manipulation (formating, escapre characters, string methods)
 * Using DateTime and DateTime manipulation
-* Branching (sf/else, switch)
+* Branching (if/else, switch)
 * Loops (for, while)
 * Classes (access modifiers, inheritance, enums)
 * Arrays (looping arrays with foreach)

@@ -36,5 +36,7 @@ This repository will contain every piece of material about the subject. It will 
 
 ## Contact
 
-* Trainer: trainer@mail.com
-* Assistant: assistant@mail.com
+* Trainer: vladimir.simonovski@gmail.com
+    * Facebook: https://www.facebook.com/simonovskiv
+* Co-Trainer: fjanev14@gmail.com
+    * Facebook: https://www.facebook.com/filip.janev1

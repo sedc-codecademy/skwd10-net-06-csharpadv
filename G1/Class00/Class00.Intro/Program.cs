@@ -1,6 +1,7 @@
 ﻿// See https://aka.ms/new-console-template for more information
 using Class00.Intro.Entities;
 using Class00.Intro.Enums;
+using System.Globalization;
 
 Console.WriteLine("Zdravo na site, dobredojdovte na kursot C# Advanced!");
 Console.Write("Sega kje povtorime shto se ");
@@ -36,7 +37,7 @@ Console.WriteLine($"{broj1} pomnozen so 10 i podelen so 2 e {(broj1 * 10) / 2}")
 #endregion Input and parsing
 
 #region DateTime
-//DateTime currentDateTime = DateTime.Now;
+DateTime currentDateTime = DateTime.Now;
 
 //// Adding or removing days to a DateTime date
 //DateTime addedDays = currentDateTime.AddDays(2);
@@ -67,6 +68,9 @@ Console.WriteLine($"{broj1} pomnozen so 10 i podelen so 2 e {(broj1 * 10) / 2}")
 //// Get the number of the year from a DateTime
 //int year = currentDateTime.Year;
 //Console.WriteLine(year);
+
+//DateTime dateFormatted = DateTime.ParseExact("23-05-2022", "dd-MM-yyyy", CultureInfo.InvariantCulture);
+//Console.WriteLine(dateFormatted.ToString());
 
 #endregion DateTime
 
@@ -162,7 +166,7 @@ Console.WriteLine("=========================================");
 //Console.WriteLine("Vnesi prezime: ");
 //student.Surname = Console.ReadLine();
 
-//student.Gender = GenderEnum.Male.ToString().ToLower();
+//student.Gender = ((int)GenderEnum.Male).ToString().ToLower();
 
 //try
 //{
@@ -208,6 +212,5 @@ Console.WriteLine("=========================================");
 static string GetFullName(string firstName, string lastName)
 {
     return firstName + " " + lastName;
-
 }
 #endregion metod
