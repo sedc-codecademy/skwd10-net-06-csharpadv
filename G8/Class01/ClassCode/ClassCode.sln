@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32328.378
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BoxingUnboxing", "BoxingUnboxing\BoxingUnboxing.csproj", "{3E64CD1A-2706-4E9A-AA84-ED9717E6EF89}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "App", "App\App.csproj", "{8E27BF0E-49AB-4304-8888-99B63805B4D7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Domain\Domain.csproj", "{12C435C5-357A-476D-9CE1-9B8DD0AB8716}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3E64CD1A-2706-4E9A-AA84-ED9717E6EF89}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3E64CD1A-2706-4E9A-AA84-ED9717E6EF89}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3E64CD1A-2706-4E9A-AA84-ED9717E6EF89}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3E64CD1A-2706-4E9A-AA84-ED9717E6EF89}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8E27BF0E-49AB-4304-8888-99B63805B4D7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8E27BF0E-49AB-4304-8888-99B63805B4D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8E27BF0E-49AB-4304-8888-99B63805B4D7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8E27BF0E-49AB-4304-8888-99B63805B4D7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{12C435C5-357A-476D-9CE1-9B8DD0AB8716}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{12C435C5-357A-476D-9CE1-9B8DD0AB8716}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{12C435C5-357A-476D-9CE1-9B8DD0AB8716}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{12C435C5-357A-476D-9CE1-9B8DD0AB8716}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {EDF94577-04F3-4DA3-AADA-F9F232AF5429}
+	EndGlobalSection
+EndGlobal
