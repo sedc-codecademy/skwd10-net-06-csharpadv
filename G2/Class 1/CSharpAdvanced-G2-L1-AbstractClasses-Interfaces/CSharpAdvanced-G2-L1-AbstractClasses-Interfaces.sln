@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32328.378
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSharpAdvanced-G2-L1-AbstractClasses", "CSharpAdvanced-G2-L1-AbstractClasses-Interfaces\CSharpAdvanced-G2-L1-AbstractClasses.csproj", "{375BE519-9F78-4810-A26E-2DF7DC0FD1EF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{375BE519-9F78-4810-A26E-2DF7DC0FD1EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{375BE519-9F78-4810-A26E-2DF7DC0FD1EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{375BE519-9F78-4810-A26E-2DF7DC0FD1EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{375BE519-9F78-4810-A26E-2DF7DC0FD1EF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {CF54AE1E-07B2-4631-9303-DBF69664F97D}
+	EndGlobalSection
+EndGlobal
