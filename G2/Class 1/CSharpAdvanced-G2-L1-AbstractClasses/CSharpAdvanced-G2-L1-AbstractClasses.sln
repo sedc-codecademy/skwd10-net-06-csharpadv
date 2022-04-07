@@ -5,6 +5,8 @@ VisualStudioVersion = 17.1.32328.378
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSharpAdvanced-G2-L1-AbstractClasses", "CSharpAdvanced-G2-L1-AbstractClasses\CSharpAdvanced-G2-L1-AbstractClasses.csproj", "{2D5ABAF2-B4A7-4218-B138-1362C4CF90B7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSharpAdvanced-G2-L1-AbstractClasses-EX1", "CSharpAdvanced-G2-L1-AbstractClasses-EX1\CSharpAdvanced-G2-L1-AbstractClasses-EX1.csproj", "{4E1DFEF3-311A-4758-90E3-0FEE26AD5A41}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{2D5ABAF2-B4A7-4218-B138-1362C4CF90B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2D5ABAF2-B4A7-4218-B138-1362C4CF90B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2D5ABAF2-B4A7-4218-B138-1362C4CF90B7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4E1DFEF3-311A-4758-90E3-0FEE26AD5A41}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4E1DFEF3-311A-4758-90E3-0FEE26AD5A41}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4E1DFEF3-311A-4758-90E3-0FEE26AD5A41}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4E1DFEF3-311A-4758-90E3-0FEE26AD5A41}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
