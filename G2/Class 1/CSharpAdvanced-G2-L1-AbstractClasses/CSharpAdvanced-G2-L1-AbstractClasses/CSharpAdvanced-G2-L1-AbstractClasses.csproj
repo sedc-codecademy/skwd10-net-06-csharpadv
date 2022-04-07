@@ -3,7 +3,7 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>net6.0</TargetFramework>
-    <RootNamespace>CSharpAdvanced_G2_L1_AbstractClasses_Interfaces</RootNamespace>
+    <RootNamespace>CSharpAdvanced_G2_L1_AbstractClasses</RootNamespace>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
