@@ -1,6 +1,6 @@
 ﻿namespace CSharpAdvanced_G2_L1_AbstractClasses_EX1.Entities
 {
-    public class Developer : Employee
+    public class Developer : Employee // Developer EXTENDS/INHERITS FROM Employee
     {
         public string CurrentProjectName { get; set; }
 

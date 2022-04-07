@@ -7,6 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSharpAdvanced-G2-L1-Abstra
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSharpAdvanced-G2-L1-AbstractClasses-EX1", "CSharpAdvanced-G2-L1-AbstractClasses-EX1\CSharpAdvanced-G2-L1-AbstractClasses-EX1.csproj", "{4E1DFEF3-311A-4758-90E3-0FEE26AD5A41}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSharpAdvanced-G2-L1-Interfaces", "CSharpAdvanced-G2-L1-Interfaces\CSharpAdvanced-G2-L1-Interfaces.csproj", "{B3B9EB70-B15E-4EF4-9193-5FCCD40A6620}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CharpAdvanced-G2-L1-Interfaces-EX1", "CharpAdvanced-G2-L1-Interfaces-EX1\CharpAdvanced-G2-L1-Interfaces-EX1.csproj", "{38F882B4-45A9-4977-B1F8-87762AD5431B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,14 @@ Global
 		{4E1DFEF3-311A-4758-90E3-0FEE26AD5A41}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4E1DFEF3-311A-4758-90E3-0FEE26AD5A41}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4E1DFEF3-311A-4758-90E3-0FEE26AD5A41}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B3B9EB70-B15E-4EF4-9193-5FCCD40A6620}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B3B9EB70-B15E-4EF4-9193-5FCCD40A6620}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B3B9EB70-B15E-4EF4-9193-5FCCD40A6620}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B3B9EB70-B15E-4EF4-9193-5FCCD40A6620}.Release|Any CPU.Build.0 = Release|Any CPU
+		{38F882B4-45A9-4977-B1F8-87762AD5431B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{38F882B4-45A9-4977-B1F8-87762AD5431B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{38F882B4-45A9-4977-B1F8-87762AD5431B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{38F882B4-45A9-4977-B1F8-87762AD5431B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
