@@ -1,0 +1,1 @@
+This is the implementation of the provided [README.md](/README.md) example, with slight modification to accomodate the `QAEngineer` class into the mix. Check the code documentation/comments for more info.
