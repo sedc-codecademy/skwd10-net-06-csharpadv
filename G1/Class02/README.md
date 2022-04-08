@@ -1,4 +1,4 @@
-# Class 02 - Static classes, members and polymorphism 🍔
+# Class 02 - Static classes, partial classes and polymorphism 🍔
 
 ## Static Classes 🔹
 
