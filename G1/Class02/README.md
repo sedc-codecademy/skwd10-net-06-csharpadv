@@ -79,10 +79,10 @@ ord.IsOrderValid(ord); // Will show an error
 ```
 
 ## Partial classes 🔹
-Partial class as the name suggested is a class that is containing only one part of the whole class implementation. The whole class is contained by several partial classes. So, with using partial classed we can split one class in several other that each of them can be in separate file. There are several situations when splitting a class definition is desirable:
-*When working on large projects, spreading a class over separate files enables multiple programmers to work on it at the same time.
-*When working with automatically generated source, code can be added to the class without having to recreate the source file. Visual Studio uses this approach when it creates Windows Forms, Web service wrapper code, and so on. You can create code that uses these classes without having to modify the file created by Visual Studio.
-*When using source generators to generate additional functionality in a class.
+Partial class as the name suggested is a class that is containing only one part of the whole class implementation. The whole class is contained by several partial classes. So, with using partial classed we can split one class in several other and each of them can be in separate file. There are several situations when splitting a class definition is desirable:
+* When working on large projects, spreading a class over separate files enables multiple programmers to work on it at the same time.
+* When working with automatically generated source, code can be added to the class without having to recreate the source file. Visual Studio uses this approach when it creates Windows Forms, Web service wrapper code, and so on. You can create code that uses these classes without having to modify the file created by Visual Studio.
+* When using source generators to generate additional functionality in a class.
 
 ```csharp
 public partial class Employee
