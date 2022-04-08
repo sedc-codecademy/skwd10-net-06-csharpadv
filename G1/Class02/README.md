@@ -78,6 +78,48 @@ Console.WriteLine(Order.IsOrderValid(ord));
 ord.IsOrderValid(ord); // Will show an error
 ```
 
+## Partial classes 🔹
+Partial class as the name suggested is a class that is containing only one part of the whole class implementation. The whole class is contained by several partial classes. So, with using partial classed we can split one class in several other that each of them can be in separate file. There are several situations when splitting a class definition is desirable:
+*When working on large projects, spreading a class over separate files enables multiple programmers to work on it at the same time.
+*When working with automatically generated source, code can be added to the class without having to recreate the source file. Visual Studio uses this approach when it creates Windows Forms, Web service wrapper code, and so on. You can create code that uses these classes without having to modify the file created by Visual Studio.
+*When using source generators to generate additional functionality in a class.
+
+```csharp
+public partial class Employee
+{
+    public void DoWork()
+    {
+    }
+}
+
+public partial class Employee
+{
+    public void GoToLunch()
+    {
+    }
+}
+```
+
+The partial keyword indicates that other parts of the class can be defined in the namespace. All the parts must use the partial keyword. All the parts must be available at compile time to form the final type. All the parts must have the same accessibility, such as public, private, and so on.
+
+If any part is declared abstract, then the whole type is considered abstract. If any part is declared sealed, then the whole type is considered sealed. If any part declares a base type, then the whole type inherits that class. 
+
+Any class members declared in a partial definition are available to all the other parts. The final type is the combination of all the parts at compile time.
+
+For example, consider the following declarations:
+
+```csharp
+partial class Earth : Planet, IRotate { }
+partial class Earth : IRevolve { }
+```
+
+They are equivalent to the following declarations:
+
+
+```csharp
+class Earth : Planet, IRotate, IRevolve { }
+``` 
+
 ## Polymorphism 🔹
 
 Polymorphism is one of the base concepts of Object-Oriented programming. Since C# is an object-oriented language and was built that way, this concept is embedded in its core. The name Polymorphism can sound a bit complicated, but the idea of polymorphism is not that complicated. Methods in C# need to have different names for us to differentiate them. We can't create methods that share the same name as well. But that is not always the case. With polymorphism we can actually have multiple methods with the same name and the compiler can differentiate them one from the other. This is done in a few ways:
