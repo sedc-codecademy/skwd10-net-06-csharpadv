@@ -5,6 +5,8 @@ VisualStudioVersion = 17.1.32328.378
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSharp-Advanced-G3-L2", "CSharp-Advanced-G3-L2\CSharp-Advanced-G3-L2.csproj", "{7865F819-D275-44DD-BB79-F7778030658B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSharp-Advanced-G3-L2-Poly", "CSharp-Advanced-G3-L2-Poly\CSharp-Advanced-G3-L2-Poly.csproj", "{6CEC700E-7D72-4050-9124-0A15B5064BE1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{7865F819-D275-44DD-BB79-F7778030658B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7865F819-D275-44DD-BB79-F7778030658B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7865F819-D275-44DD-BB79-F7778030658B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6CEC700E-7D72-4050-9124-0A15B5064BE1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6CEC700E-7D72-4050-9124-0A15B5064BE1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6CEC700E-7D72-4050-9124-0A15B5064BE1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6CEC700E-7D72-4050-9124-0A15B5064BE1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
