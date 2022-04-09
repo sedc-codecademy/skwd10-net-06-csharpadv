@@ -19,3 +19,5 @@ if (TextHelper.ValidateInteger(Console.ReadLine()))
     Console.WriteLine("Vneseniot string e integer!");
 }
 Console.WriteLine(TextHelper.ValidationCounter);
+
+
