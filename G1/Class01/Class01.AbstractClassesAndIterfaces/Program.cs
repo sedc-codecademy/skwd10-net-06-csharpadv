@@ -1,4 +1,5 @@
 ﻿using Class01.AbstractClassesAndIterfaces.Entities;
+using Class01.AbstractClassesAndIterfaces.Entities.Interfaces;
 
 // Can't create an instance of an abstract class
 // Human person = new Human();
@@ -13,6 +14,11 @@ Operations ops = new Operations("Greg Gregsky", 28, 38975075075,
 DevOps devOps = new DevOps("Anne Brown", 24, 38977070070, true, false);
 QAEngineer qa = new QAEngineer("Mia Wong", 34, 38972072072,
 	new List<string>() { "Selenium" });
+
+List<IHuman> human = new List<IHuman>();
+List<string> lang = new List<string>();
+human.Add(new Developer() { FullName = "Risto P", Age = 33, Phone = 123123123, ProgrammingLanguages = lang, YearsExperience = 13 });
+
 #endregion
 
 #region Testing all methods
