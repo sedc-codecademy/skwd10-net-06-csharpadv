@@ -11,6 +11,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Class02.WinForms", "Class02
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Class02.Exerscise01", "Class02.Exerscise01\Class02.Exerscise01.csproj", "{98D7BC81-7374-4A72-B84C-65CC8FE73380}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Calss02.Polymorphism", "Calss02.Polymorphism\Calss02.Polymorphism.csproj", "{974BC0C7-0801-4787-8AC3-9A9E997B73D1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Class02.Static", "Class02.Static\Class02.Static.csproj", "{EFB2F0A4-4BB3-4CB1-B312-2D3557EAEC90}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +37,14 @@ Global
 		{98D7BC81-7374-4A72-B84C-65CC8FE73380}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{98D7BC81-7374-4A72-B84C-65CC8FE73380}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{98D7BC81-7374-4A72-B84C-65CC8FE73380}.Release|Any CPU.Build.0 = Release|Any CPU
+		{974BC0C7-0801-4787-8AC3-9A9E997B73D1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{974BC0C7-0801-4787-8AC3-9A9E997B73D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{974BC0C7-0801-4787-8AC3-9A9E997B73D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{974BC0C7-0801-4787-8AC3-9A9E997B73D1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EFB2F0A4-4BB3-4CB1-B312-2D3557EAEC90}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EFB2F0A4-4BB3-4CB1-B312-2D3557EAEC90}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EFB2F0A4-4BB3-4CB1-B312-2D3557EAEC90}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EFB2F0A4-4BB3-4CB1-B312-2D3557EAEC90}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

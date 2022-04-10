@@ -5,21 +5,29 @@ using Class02.Exerscise01.Enums;
 
 Console.WriteLine("Hello, World!");
 
+CarManagementService carManagementService = new CarManagementService();
+Console.WriteLine("=======================================");
+Console.WriteLine("All cars in dealership");
+carManagementService.PrintAllCars();
 
 Car car = new Car()
 {
+    Id = 1,
     Name = "Astra",
     Manifacturer = "Opel",
     Fuel = FuelEnum.Petrol,
-    TopSpeed = 220,
-    NumberOfDoors = 5,
-    Id = 1
+    TopSpeed = 200,
+    NumberOfDoors = 5
 };
+carManagementService.Add(car);
 
-CarManagementService carManagementService = new CarManagementService();
-Console.WriteLine("Vast cares are the following: ");
+Console.WriteLine("=======================================");
+Console.WriteLine("All cars in dealership after  added new one");
+carManagementService.PrintAllCars();
+
+Console.WriteLine("=======================================");
+Console.WriteLine("Fast cars are the following: ");
 foreach (var item in carManagementService.GetAllVeryFastCars())
 {
     Console.WriteLine(item.Manifacturer + " " + item.Name);
 }
-//Console.WriteLine(car.GetVehicleInfo());

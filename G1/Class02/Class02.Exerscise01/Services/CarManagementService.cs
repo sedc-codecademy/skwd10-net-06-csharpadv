@@ -1,19 +1,27 @@
 ﻿using Class02.Exerscise01.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Class02.Exerscise01
 {
     internal class CarManagementService
     {
+        public bool Add(Car car)
+        {
+            try
+            {
+                CarDealershipDB.Cars.Add(car);
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+            return true;
+        }
+
         public void PrintAllCars()
         {
             foreach (var item in CarDealershipDB.Cars)
             {
-                Console.WriteLine(item.GetVehicleInfo());
+                Console.WriteLine(item.Manifacturer + " " + item.Name + " " + item.Fuel);
             }
         }
 

@@ -15,25 +15,3 @@ DogShelter.PrintAll();
 DogShelter.Dogs.Remove(dog1);
 DogShelter.PrintAll();
 #endregion
-
-Console.WriteLine("=======================================");
-
-Console.WriteLine("=========== Partial classes ===========");
-#region partial
-Car car = new Car();
-car.Manifacturer = "toyota";
-car.Name = "Aygo";
-car.TopSpeed = 160;
-car.ServiceInfo();
-#endregion
-
-
-Console.WriteLine("=======================================");
-
-Console.WriteLine(12.12);
-#region Polimorphism
-Console.WriteLine(PetShop.GetAge(new object()));
-Console.WriteLine(PetShop.GetAge(new object(), 1));
-Console.WriteLine(PetShop.GetAge(1, new object()));
-
-#endregion
