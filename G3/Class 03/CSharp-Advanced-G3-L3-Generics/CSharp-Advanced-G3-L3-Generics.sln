@@ -5,6 +5,8 @@ VisualStudioVersion = 17.1.32328.378
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSharp-Advanced-G3-L3-Generics", "CSharp-Advanced-G3-L3-Generics\CSharp-Advanced-G3-L3-Generics.csproj", "{D1DA728B-4ECD-4ACF-BD43-CDAE3CB02E0F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSharp-Advanced-G3-L3-Extensions", "CSharp-Advanced-G3-L3-Extensions\CSharp-Advanced-G3-L3-Extensions.csproj", "{8B116BED-F5E5-47B8-B765-26FDA0B434EE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{D1DA728B-4ECD-4ACF-BD43-CDAE3CB02E0F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D1DA728B-4ECD-4ACF-BD43-CDAE3CB02E0F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D1DA728B-4ECD-4ACF-BD43-CDAE3CB02E0F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8B116BED-F5E5-47B8-B765-26FDA0B434EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8B116BED-F5E5-47B8-B765-26FDA0B434EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8B116BED-F5E5-47B8-B765-26FDA0B434EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8B116BED-F5E5-47B8-B765-26FDA0B434EE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
