@@ -1,0 +1,3 @@
+A simpler example of "Humans" example that introduces two concepts - food and food processor. It focuses more on flexibility and differences in different implementations for a given interface rather than building up a model hierarchy, and also shows interaction between two interfaces without context of the actual classes involved.
+
+Small note - the example uses the `Thread.Sleep(int milliseconds)` method that makes the program execution pause for a fixed ammount of time. You can read more here: https://docs.microsoft.com/en-us/dotnet/api/system.threading.thread.sleep?view=net-6.0
