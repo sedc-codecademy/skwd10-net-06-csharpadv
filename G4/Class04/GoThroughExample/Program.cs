@@ -44,7 +44,8 @@ namespace GoThroughExample // Note: actual namespace depends on the project name
             };
 
             // on the other hand, the objects in this list will output the default
-            // behavior 
+            // behavior of ToString() (namespace + class name) and won't show
+            // anything related to the state of the object
             var uglyPrintedObjectList = new List<UglyPrintedComplexObject> 
             {
                 new UglyPrintedComplexObject() { Name = "Ugly object", Description = "Ugly - ew! Good thing this description won't be printed!" },
