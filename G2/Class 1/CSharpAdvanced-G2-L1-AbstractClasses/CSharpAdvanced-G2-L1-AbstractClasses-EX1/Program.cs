@@ -34,6 +34,7 @@ Developer teamLeadTwo = new TeamLead(4, "Team", "Leader", 45, "Everywhere", deve
 // Downcasting
 // Employee -> Developer -> TeamLead
 
+// Compile time polymorphism
 List<Employee> employees = new List<Employee>()
 {
     new Developer(1, "Mihajlo", "Dimovski", 32, "FitXP"),
@@ -48,6 +49,9 @@ Employee employeeThree = new Developer(3, "Ivan", "Dzikovski", 32, "E-Health");
 
 foreach (Employee employee in employees)
 {
+    // Runtime polymorphism
+    employee.Work();
+
     if (employee is TeamLead)
     {
         Console.WriteLine($"{employee.FirstName} {employee.LastName} is a team lead");
