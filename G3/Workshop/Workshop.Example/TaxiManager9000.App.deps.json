@@ -1,0 +1,80 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v6.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v6.0": {
+      "TaxiManager9000.App/1.0.0": {
+        "dependencies": {
+          "TaxiManager9000.Domain": "1.0.0",
+          "TaxiManager9000.Services": "1.0.0"
+        },
+        "runtime": {
+          "TaxiManager9000.App.dll": {}
+        }
+      },
+      "Newtonsoft.Json/13.0.1": {
+        "runtime": {
+          "lib/netstandard2.0/Newtonsoft.Json.dll": {
+            "assemblyVersion": "13.0.0.0",
+            "fileVersion": "13.0.1.25517"
+          }
+        }
+      },
+      "TaxiManager9000.DataAccess/1.0.0": {
+        "dependencies": {
+          "Newtonsoft.Json": "13.0.1",
+          "TaxiManager9000.Domain": "1.0.0"
+        },
+        "runtime": {
+          "TaxiManager9000.DataAccess.dll": {}
+        }
+      },
+      "TaxiManager9000.Domain/1.0.0": {
+        "runtime": {
+          "TaxiManager9000.Domain.dll": {}
+        }
+      },
+      "TaxiManager9000.Services/1.0.0": {
+        "dependencies": {
+          "TaxiManager9000.DataAccess": "1.0.0",
+          "TaxiManager9000.Domain": "1.0.0"
+        },
+        "runtime": {
+          "TaxiManager9000.Services.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "TaxiManager9000.App/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Newtonsoft.Json/13.0.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-ppPFpBcvxdsfUonNcvITKqLl3bqxWbDCZIzDWHzjpdAHRFfZe0Dw9HmA0+za13IdyrgJwpkDTDA9fHaxOrt20A==",
+      "path": "newtonsoft.json/13.0.1",
+      "hashPath": "newtonsoft.json.13.0.1.nupkg.sha512"
+    },
+    "TaxiManager9000.DataAccess/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "TaxiManager9000.Domain/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "TaxiManager9000.Services/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}
