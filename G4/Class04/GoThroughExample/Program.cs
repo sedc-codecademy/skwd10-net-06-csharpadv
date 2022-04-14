@@ -34,6 +34,26 @@ namespace GoThroughExample // Note: actual namespace depends on the project name
 
             IntListHelper intListHelper = new IntListHelper();
             intListHelper.GetInfo(ints);
+
+            // the objects in this list will be printed according to the implementation
+            // of the override of object.ToString()
+            var prettyPrintedObjectList = new List<PrettyPrintedComplexObject> 
+            {
+                new PrettyPrintedComplexObject() { Name = "Pretty object", Description = "So pretty!" },
+                new PrettyPrintedComplexObject() { Name = "Another pretty object", Description = "So shiny!" }
+            };
+
+            // on the other hand, the objects in this list will output the default
+            // behavior of ToString() (namespace + class name) and won't show
+            // anything related to the state of the object
+            var uglyPrintedObjectList = new List<UglyPrintedComplexObject> 
+            {
+                new UglyPrintedComplexObject() { Name = "Ugly object", Description = "Ugly - ew! Good thing this description won't be printed!" },
+                new UglyPrintedComplexObject() { Name = "Very ugly object", Description = "Very ugly - YUCK! Good thing this description won't be printed either!" }
+            };
+
+            GoThrough(prettyPrintedObjectList);
+            GoThrough(uglyPrintedObjectList);
         }
 
         /// <summary>
@@ -107,7 +127,7 @@ namespace GoThroughExample // Note: actual namespace depends on the project name
     /// override the default result we would get when printing
     /// through Console.WriteLine().
     /// </summary>
-    class ComplexObject
+    class PrettyPrintedComplexObject
     {
         public string Name { get; set; }
         public string Description { get; set; }
@@ -116,5 +136,18 @@ namespace GoThroughExample // Note: actual namespace depends on the project name
         {
             return $"{Name} - {Description}";
         }
+    }
+
+    /// <summary>
+    /// Compared to PrettyPrintedComplexObject which shares the
+    /// same property structure but overrides ToString(),
+    /// UglyPrintedComplexObject falls back to the default
+    /// object.ToString() behaviour and the output when trying
+    /// to print it is not that user-friendly/readable.
+    /// </summary>
+    class UglyPrintedComplexObject
+    {
+        public string Name { get; set; }
+        public string Description { get; set; }
     }
 }
