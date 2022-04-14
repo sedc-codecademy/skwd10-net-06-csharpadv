@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSharpAdvanced-G2-L3-Generi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSharpAdvanced-G2-L3-GenericDb", "CSharpAdvanced-G2-L3-GenericDb\CSharpAdvanced-G2-L3-GenericDb.csproj", "{DD76E330-A531-4754-BEC6-9EA1F85865A0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSharpAdvanced-G2-L3-ExtensionMethods", "CSharpAdvanced-G2-L3-ExtensionMethods\CSharpAdvanced-G2-L3-ExtensionMethods.csproj", "{04373DC6-1172-4AE5-8834-619C2B786152}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{DD76E330-A531-4754-BEC6-9EA1F85865A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DD76E330-A531-4754-BEC6-9EA1F85865A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DD76E330-A531-4754-BEC6-9EA1F85865A0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{04373DC6-1172-4AE5-8834-619C2B786152}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{04373DC6-1172-4AE5-8834-619C2B786152}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{04373DC6-1172-4AE5-8834-619C2B786152}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{04373DC6-1172-4AE5-8834-619C2B786152}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
