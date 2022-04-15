@@ -14,6 +14,13 @@
         {
             foreach (var item in items)
             {
+                // Console.WriteLine just invokes the ToString method
+                // for the object being sent as a parameter. For simple
+                // types, it's a string representation of the value,
+                // while for complex objects you need to override
+                // object.ToString() to make the output meaningful - 
+                // otherwise it's just some info regarding the type
+                // of object
                 Console.WriteLine(item);
             }
         }
