@@ -1,5 +1,6 @@
 ﻿// See https://aka.ms/new-console-template for more information
 using TaxiManager9000.Domain.Entities;
+using TaxiManager9000.Domain.Enums;
 using TaxiManager9000.Domain.Exceptions;
 using TaxiManager9000.Services;
 using TaxiManager9000.Services.Interfaces;
@@ -21,8 +22,34 @@ void ShowMenu(IAuthService authService)
 {
     switch (authService.CurrentUser.Role)
     {
-
+        case Role.Administrator:
+            ShowAdminMenu(authService);
+            break;
+        case Role.Maintainance:
+            ShowMaintainenceMenu(authService);
+            break;
+        case Role.Manager:
+            ShowManagerMenu(authService);
+            break;
+        default:
+            ConsoleUtils.WriteLineInColor($"Invalid role, {authService.CurrentUser.Role}", ConsoleColor.Red);
+            break;
     }
+}
+
+void ShowAdminMenu(IAuthService authService)
+{
+    throw new NotImplementedException();
+}
+
+void ShowMaintainenceMenu(IAuthService authService)
+{
+    throw new NotImplementedException();
+}
+
+void ShowManagerMenu(IAuthService authService)
+{
+    throw new NotImplementedException();
 }
 
 void ShowLogin(IAuthService authService)
