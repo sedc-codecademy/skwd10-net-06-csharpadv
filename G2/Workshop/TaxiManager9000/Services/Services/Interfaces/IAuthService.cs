@@ -2,7 +2,7 @@
 
 namespace TaxiManager9000.Services.Interfaces
 {
-    public interface IAuthService
+    public interface IAuthService 
     {
         User CurrentUser { get; }
 

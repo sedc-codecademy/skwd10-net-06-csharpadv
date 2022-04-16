@@ -1,8 +1,9 @@
-﻿using TaxiManager9000.Domain.Entities;
+﻿using TaxiManager9000.DataAccess.Interface;
+using TaxiManager9000.Domain.Entities;
 
 namespace TaxiManager9000.DataAccess
 {
-    public class UserDatabase
+    public class UserDatabase : IUserDatabase
     {
         private readonly List<User> _users;
 
