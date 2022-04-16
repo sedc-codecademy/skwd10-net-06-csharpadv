@@ -12,9 +12,15 @@ namespace TaxiManager9000.Domain.Entities
 
         public Role Role { get; set; }
 
-        public User(int id, string userName, string password, Role role)
+        /// <summary>
+        /// When creating a new user, which has not been added to the database
+        /// </summary>
+        /// <param name="userName"></param>
+        /// <param name="password"></param>
+        /// <param name="role"></param>
+        public User(string userName, string password, Role role)
         {
-            Id = id;
+            Id = -1;
             UserName = userName;
             Password = password;
             Role = role;

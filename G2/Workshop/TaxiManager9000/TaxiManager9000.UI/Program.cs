@@ -1,7 +1,8 @@
 ﻿// See https://aka.ms/new-console-template for more information
 using TaxiManager9000.Domain.Entities;
-using TaxiManager9000.Domain.Services;
-using TaxiManager9000.Domain.Services.Interfaces;
+using TaxiManager9000.Domain.Exceptions;
+using TaxiManager9000.Services;
+using TaxiManager9000.Services.Interfaces;
 using TaxiManager9000.UI.Utils;
 
 IAuthService authService = new AuthService();
@@ -13,6 +14,15 @@ Console.ReadLine();
 void StartApplication(IAuthService authService)
 {
     ShowLogin(authService);
+    ShowMenu(authService);
+}
+
+void ShowMenu(IAuthService authService)
+{
+    switch (authService.CurrentUser.Role)
+    {
+
+    }
 }
 
 void ShowLogin(IAuthService authService)
@@ -23,8 +33,16 @@ void ShowLogin(IAuthService authService)
     Console.WriteLine("Enter password");
     string password = Console.ReadLine();
 
-    User currentUser = authService.LogIn(username, password);
+    User currentUser;
+    try
+    {
+        authService.LogIn(username, password);
 
-    ConsoleUtils.WriteLineInColor($"Successful login! Welcome {currentUser.Role} {currentUser.UserName}",
-                                  ConsoleColor.Green);
+        ConsoleUtils.WriteLineInColor($"Successful login! Welcome {authService.CurrentUser.Role} {authService.CurrentUser.UserName}",
+                                      ConsoleColor.Green);
+    }
+    catch (InvalidCredentialsException ex)
+    {
+        ConsoleUtils.WriteLineInColor("Unsuccessful login, try again", ConsoleColor.Red);
+    }
 }

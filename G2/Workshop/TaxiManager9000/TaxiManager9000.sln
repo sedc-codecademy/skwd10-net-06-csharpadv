@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaxiManager9000.Domain", "D
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaxiManager9000.DataAccess", "DataAccess\TaxiManager9000.DataAccess.csproj", "{F4D0BDFD-291B-46FC-BD41-12A9365A26A3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaxiManager9000.Services", "Services\TaxiManager9000.Services.csproj", "{EFA5E20D-44D6-48B7-802A-692E15DBA1D1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{F4D0BDFD-291B-46FC-BD41-12A9365A26A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F4D0BDFD-291B-46FC-BD41-12A9365A26A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F4D0BDFD-291B-46FC-BD41-12A9365A26A3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EFA5E20D-44D6-48B7-802A-692E15DBA1D1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EFA5E20D-44D6-48B7-802A-692E15DBA1D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EFA5E20D-44D6-48B7-802A-692E15DBA1D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EFA5E20D-44D6-48B7-802A-692E15DBA1D1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
