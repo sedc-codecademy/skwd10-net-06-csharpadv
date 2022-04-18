@@ -42,6 +42,42 @@ orderList.FirstOrDefault(x => x.Id == 3).Name = "Order 3 Changed";
 Console.WriteLine("Real Copy List");
 realCopyList.ForEach((x) => Console.WriteLine(x));
 
+int sumOfAllQuantities = orderList.Sum(order => order.Quantity);
+Console.WriteLine($"The sum is {sumOfAllQuantities}");
+
+int max = orderList.Max(order => order.Quantity);
+Console.WriteLine($"The max quantity is {max}");
+
+Order maxOrder = orderList.FirstOrDefault(x => x.Quantity == max);
+Console.WriteLine(maxOrder);
+
+double averageQuantity = orderList.Average(x => x.Quantity);
+Console.WriteLine($"Average quantity is {averageQuantity}");
+List<Order> aboveAverage = orderList.Where(x=> x.Quantity > averageQuantity).ToList();
+aboveAverage.ForEach(x=> Console.WriteLine(x));
+
+Console.WriteLine("Ordered List: ");
+var orderedOrederList = orderList.OrderBy(x=>x.Id).ToList();
+orderedOrederList.ForEach(x => Console.WriteLine(x));
+
+Console.WriteLine("Ordered List Desc: ");
+var orderedOrederListDesc = orderList.OrderByDescending(x => x.Id).ToList();
+orderedOrederListDesc.ForEach(x => Console.WriteLine(x));
+
+Console.WriteLine("Order by string:");
+var orderedByString = orderList.OrderBy(x=> x.Name).ToList();
+orderedByString.ForEach(x=> Console.WriteLine(x));
+
+Console.WriteLine("Grouped orders by Status");
+var groupedOrders = orderList.GroupBy(x => x.OrderStatus);
+foreach (var orderGrouping in groupedOrders)
+{
+    Console.WriteLine(orderGrouping.Key);
+    foreach(var order in orderGrouping)
+    {
+        Console.WriteLine(order);
+    };
+}
 
 public class Order
 {
