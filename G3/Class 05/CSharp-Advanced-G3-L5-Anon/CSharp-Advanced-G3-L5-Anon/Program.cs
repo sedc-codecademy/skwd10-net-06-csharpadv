@@ -18,7 +18,7 @@ Func<int, int, int> addTwoNumbers = (firstNumber, secondNumber) =>
     return firstNumber + secondNumber;
 };
 
-Console.WriteLine("---- Func ----");
+/*Console.WriteLine("---- Func ----");
 
 int randomNumber = getRandomNumber();
 Console.WriteLine(randomNumber);
@@ -51,7 +51,7 @@ else
 }
 
 Console.WriteLine($"The additon of the two numbers is {addTwoNumbers(first, second)}");
-
+*/
 Console.WriteLine("---- Action ----");
 
 Action<string> printWithRedColor = (text) =>
@@ -67,6 +67,10 @@ Action<string, ConsoleColor> printWithColor = (text, color) =>
     Console.WriteLine(text);
     Console.ResetColor();
 };
+
+Action printHelloMessage = () => Console.WriteLine("Hello from anon method");
+
+printHelloMessage();
 
 printWithRedColor("This is an error message");
 

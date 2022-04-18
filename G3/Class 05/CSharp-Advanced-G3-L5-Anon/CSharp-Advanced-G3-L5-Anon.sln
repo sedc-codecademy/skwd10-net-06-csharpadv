@@ -5,6 +5,10 @@ VisualStudioVersion = 17.1.32328.378
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSharp-Advanced-G3-L5-Anon", "CSharp-Advanced-G3-L5-Anon\CSharp-Advanced-G3-L5-Anon.csproj", "{D8A326E4-90A5-497F-B238-373D22EECB96}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSharp-Advanced-G3-L5-Linq", "CSharp-Advanced-G3-L5-Linq\CSharp-Advanced-G3-L5-Linq.csproj", "{391FC8B2-9A3B-44B0-9946-09DBFADF1300}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSharp-Advanced-G3-L5-Linq-Adv", "CSharp-Advanced-G3-L5-Linq-Adv\CSharp-Advanced-G3-L5-Linq-Adv.csproj", "{C553005B-F8F3-48BA-A54C-96CC126851ED}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{D8A326E4-90A5-497F-B238-373D22EECB96}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D8A326E4-90A5-497F-B238-373D22EECB96}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D8A326E4-90A5-497F-B238-373D22EECB96}.Release|Any CPU.Build.0 = Release|Any CPU
+		{391FC8B2-9A3B-44B0-9946-09DBFADF1300}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{391FC8B2-9A3B-44B0-9946-09DBFADF1300}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{391FC8B2-9A3B-44B0-9946-09DBFADF1300}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{391FC8B2-9A3B-44B0-9946-09DBFADF1300}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C553005B-F8F3-48BA-A54C-96CC126851ED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C553005B-F8F3-48BA-A54C-96CC126851ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C553005B-F8F3-48BA-A54C-96CC126851ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C553005B-F8F3-48BA-A54C-96CC126851ED}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
