@@ -7,5 +7,9 @@ namespace TaxiManager9000.DataAccess.Interface
         void Insert(User user);
 
         User GetByUserNameAndPassword(string username, string password);
+        
+        User GetByUserName(string userName);
+
+        void Remove(User user);
     }
 }
