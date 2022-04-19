@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\DataAccess\TaxiManager9000.DataAccess.csproj" />
+    <ProjectReference Include="..\Class05.Domain\Class05.Domain.csproj" />
   </ItemGroup>
 
 </Project>
