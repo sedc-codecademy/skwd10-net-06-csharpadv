@@ -9,6 +9,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Class05.Domain", "Class05.D
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Class05.Services", "Class05.Services\Class05.Services.csproj", "{BFFE3A93-04E1-476D-955B-24C8D2A8F318}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Class05.Annonymous", "Class05.Annonymous\Class05.Annonymous.csproj", "{F416269A-67C5-488F-9120-4282C2A83155}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{776A6804-5022-4C93-BD0B-DC826981A8FB}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +34,10 @@ Global
 		{BFFE3A93-04E1-476D-955B-24C8D2A8F318}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BFFE3A93-04E1-476D-955B-24C8D2A8F318}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BFFE3A93-04E1-476D-955B-24C8D2A8F318}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F416269A-67C5-488F-9120-4282C2A83155}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F416269A-67C5-488F-9120-4282C2A83155}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F416269A-67C5-488F-9120-4282C2A83155}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F416269A-67C5-488F-9120-4282C2A83155}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
