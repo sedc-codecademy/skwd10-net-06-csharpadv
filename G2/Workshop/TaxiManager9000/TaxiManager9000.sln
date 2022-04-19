@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaxiManager9000.DataAccess"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaxiManager9000.Services", "Services\TaxiManager9000.Services.csproj", "{EFA5E20D-44D6-48B7-802A-692E15DBA1D1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaxiManager9000.Shared", "TaxiManager9000.Shared\TaxiManager9000.Shared.csproj", "{C1691D35-FAE6-4E78-B98A-51FC431D9A40}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{EFA5E20D-44D6-48B7-802A-692E15DBA1D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EFA5E20D-44D6-48B7-802A-692E15DBA1D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EFA5E20D-44D6-48B7-802A-692E15DBA1D1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C1691D35-FAE6-4E78-B98A-51FC431D9A40}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C1691D35-FAE6-4E78-B98A-51FC431D9A40}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C1691D35-FAE6-4E78-B98A-51FC431D9A40}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C1691D35-FAE6-4E78-B98A-51FC431D9A40}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
