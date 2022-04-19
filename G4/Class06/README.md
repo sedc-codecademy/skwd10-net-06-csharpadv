@@ -92,7 +92,7 @@ public abstract class BaseEntity
     public int Id { get; set; }
 }
 
-public class Student
+public class Student : BaseEntity
 {
     public string FirstName { get; set; }
     public string LastName { get; set; }
@@ -113,7 +113,7 @@ public class Student
     }
 }
 
-public class Subject
+public class Subject : BaseEntity
 {
     public string Title { get; set; }
     public int Modules { get; set; }
