@@ -2,12 +2,9 @@
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
+    <RootNamespace>CSharpAdvanced_G2_L5_AnonymousMethodsAndLinq</RootNamespace>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\DataAccess\TaxiManager9000.DataAccess.csproj" />
-  </ItemGroup>
 
 </Project>
