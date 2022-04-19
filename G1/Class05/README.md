@@ -78,3 +78,8 @@ Func<string, bool> IsBob = x => x == "Bob";
 string foundJill = names.FirstOrDefault(IsBob);
 Console.WriteLine(foundJill);
 ```
+
+## Extra Materials 📘
+
+- [Microsoft - Lambda Expressions](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/statements-expressions-operators/lambda-expressions)
+- [Action, Func and Predicate](https://www.infoworld.com/article/3057152/how-to-work-with-action-func-and-predicate-delegates-in-csharp.html)
