@@ -60,4 +60,6 @@ bool sameIds = Students.All(x => x.Id == 1);
 
 //Students.OrderBy(x => x.FirstName).ThenBy(x=>x.Id).ToList().Print();
 
-Subjects.OrderByDescending(x => x.Id).ToList().Print();
+//Subjects.OrderByDescending(x => x.Id).ToList().Print();
+
+Subjects.OrderBy(x => x.Name).ToList().Print();
