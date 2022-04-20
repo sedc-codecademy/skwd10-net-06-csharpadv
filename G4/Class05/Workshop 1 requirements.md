@@ -28,8 +28,8 @@
   * License
   * LicenseExpiryDate
 
-//Implement classes that will allow the user to interact with a "database" through the UI
-//Create UI with options
+Implement classes that will allow the user to interact with a "database" through the UI
+Create UI with options
     * Log in
     * Create a user
     * List all vehicles / List all operational vehicles
