@@ -2,13 +2,13 @@
 List<string> list2 = new List<string>();
 
 #region Finctions with Lambda
-//string result = list.Find(x => x == "string 3");
+string result = list.Find(x => x == "string 3");
 
-//Func<bool> isListEmpty = () => list2.Count == 0;
+Func<bool> isListEmpty = () => list2.Count == 0;
 
-//Func<List<string>, bool> isList1Empty = (x) => x.Count == 0;
+Func<List<string>, bool> isList1Empty = (x) => x.Count == 0;
 
-//Func<int, int, int> multiply = (a, b) => a * b;
+Func<int, int, int> multiply = (a, b) => a * b;
 
 Func<int, int, bool> checkLarger = (a, b) =>
  {
@@ -19,25 +19,25 @@ Func<int, int, bool> checkLarger = (a, b) =>
      return false;
  };
 
-//if(isList1Empty(list2))
-//{
-//    Console.WriteLine("Listata e prazna");
-//}
-//else
-//{
-//    Console.WriteLine("Listata ne e prazna");
-//}
+if (isList1Empty(list2))
+{
+    Console.WriteLine("Listata e prazna");
+}
+else
+{
+    Console.WriteLine("Listata ne e prazna");
+}
 
-//Console.WriteLine(multiply(2,4));
+Console.WriteLine(multiply(2, 4));
 
-//if(checkLarger(3,7))
-//{
-//    Console.WriteLine("3 is larger than 7");
-//}
-//else
-//{
-//    Console.WriteLine("3 is not larger than 7");
-//}
+if (checkLarger(3, 7))
+{
+    Console.WriteLine("3 is larger than 7");
+}
+else
+{
+    Console.WriteLine("3 is not larger than 7");
+}
 
 Func<string, bool> IsBob = x => x == "string 3";
 string foundJill = list.FirstOrDefault(IsBob);
