@@ -117,7 +117,7 @@
             // Find and print all persons firstnames starting with 'R', ordered by Age - DESCENDING ORDER
 			
 			
-   	    //Find and print all persons firstnames and lastnames with job Dentist with age below 32
+			// Find and print all persons firstnames and lastnames with job Dentist with age below 32
 			
 
             // Find and print all brown dogs names and ages older than 3 years, ordered by Age - ASCENDING ORDER
@@ -126,19 +126,19 @@
             // Find and print all persons names with more than 2 dogs, ordered by Name - DESCENDING ORDER
 			
 			
-	    // Find and print all black dogs names from race dalmatins, order by Age - ASCENDING ORDER
+			// Find and print all black dogs names from race dalmatins, order by Age - ASCENDING ORDER
           
 
             // Find and print all Freddy`s dogs names older than 1 year
 			
 			
-	    // Find and print all persons firstnames with job developer, don't have dogs and are younger than 25 years, order by age - ASCENDING ORDER
+			// Find and print all persons firstnames with job developer, don't have dogs and are younger than 25 years, order by age - ASCENDING ORDER
            
 
             // Find and print Nathen`s first dog
 			
 			
-	    // Find and print all Freddy Gordin's dogs from race boxer and bulldog older than 1 year, ordered by name - DESCENDING ORDER
+			// Find and print all Freddy Gordin's dogs from race boxer and bulldog older than 1 year, ordered by name - DESCENDING ORDER
            
 
             // Find and print all white dogs names from Cristofer, Freddy, Erin and Amelia, ordered by Name - ASCENDING ORDER
