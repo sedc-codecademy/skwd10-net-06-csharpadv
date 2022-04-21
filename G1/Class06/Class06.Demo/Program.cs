@@ -2,6 +2,7 @@
 using Class06.DataAccess;
 using Classo6.Domain.Entities;
 using Classo6.Domain.enums;
+
 #region Where
 //Console.WriteLine("==== SLQ LIKE ========");
 ////Filters all records by where condition and returns IEnumerable of the object
@@ -169,6 +170,6 @@ using Classo6.Domain.enums;
 #endregion
 
 #region ORDERBY / ORDERBYDESCENDING / THENBY / THENBYDESCENDING
-List<Student> studentsOrdered = SEDC.Students.OrderBy(x => x.FirstName).ThenByDescending(x => x.LastName).ToList();
-studentsOrdered.PrintEntities();
+//List<Student> studentsOrdered = SEDC.Students.OrderBy(x => x.FirstName).ThenByDescending(x => x.LastName).ToList();
+//studentsOrdered.PrintEntities();
 #endregion
