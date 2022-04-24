@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32328.378
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Annonymous", "Annonymous\Annonymous.csproj", "{0CD0CF1A-EDB5-4060-8772-820AA333BEBD}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LINQ", "LINQ\LINQ.csproj", "{2DD6F8DE-D22B-4A79-A54D-3BC21BB4589E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Exercise", "Exercise\Exercise.csproj", "{61E3501E-7531-474C-A87A-FC738EB5D67C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0CD0CF1A-EDB5-4060-8772-820AA333BEBD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0CD0CF1A-EDB5-4060-8772-820AA333BEBD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0CD0CF1A-EDB5-4060-8772-820AA333BEBD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0CD0CF1A-EDB5-4060-8772-820AA333BEBD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2DD6F8DE-D22B-4A79-A54D-3BC21BB4589E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2DD6F8DE-D22B-4A79-A54D-3BC21BB4589E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2DD6F8DE-D22B-4A79-A54D-3BC21BB4589E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2DD6F8DE-D22B-4A79-A54D-3BC21BB4589E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{61E3501E-7531-474C-A87A-FC738EB5D67C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{61E3501E-7531-474C-A87A-FC738EB5D67C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{61E3501E-7531-474C-A87A-FC738EB5D67C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{61E3501E-7531-474C-A87A-FC738EB5D67C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E64B00ED-CE44-4630-BFD5-3118FE9E51DF}
+	EndGlobalSection
+EndGlobal
