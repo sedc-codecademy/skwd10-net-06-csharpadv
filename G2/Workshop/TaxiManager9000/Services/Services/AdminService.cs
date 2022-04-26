@@ -15,7 +15,6 @@ namespace TaxiManager9000.Services
         public AdminService()
         {
             _database = DepencyResolver.GetService<IUserDatabase>();
-            _authService = DepencyResolver.GetService<IAuthService>();
         }
 
         public void AddUser(string userName, string password, Role role)
@@ -30,6 +29,11 @@ namespace TaxiManager9000.Services
             }
 
             _database.Insert(user);
+        }
+
+        public void ChangePassword(string userName, string password)
+        {
+            throw new NotImplementedException();
         }
 
         public void TerminateUser(string userName)
