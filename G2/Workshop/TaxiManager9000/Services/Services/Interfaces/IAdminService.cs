@@ -8,5 +8,7 @@ namespace TaxiManager9000.Services.Interfaces
         void AddUser(string userName, string password, Role role);
 
         void TerminateUser(string userName);
+
+        void ChangePassword(string userName, string password);
     }
 }

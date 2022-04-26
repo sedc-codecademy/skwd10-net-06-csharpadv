@@ -69,6 +69,15 @@ void ShowAdminMenu(IAdminService adminService)
                 adminService.TerminateUser(userName);
                 break;
             }
+        case AdminMenuOptions.CHANGE_USER_PASSWORD:
+            {
+                Console.WriteLine("Enter username");
+                string userName = Console.ReadLine();
+
+                Console.WriteLine("Enter password");
+                string password = Console.ReadLine();
+                break;
+            }
         default:
             throw new ArgumentOutOfRangeException("Invalid input");
     }
