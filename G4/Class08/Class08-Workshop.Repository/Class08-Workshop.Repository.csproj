@@ -1,0 +1,12 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <RootNamespace>Class05_Workshop.Repository</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Class08-Workshop.Domain\Class08-Workshop.Domain.csproj" />
+  </ItemGroup>
+
+</Project>
