@@ -1,4 +1,6 @@
-﻿#region Methods
+﻿using Class07.Demo.Entities;
+//DELEGATES
+#region Methods
 void SayWhatever(string whatever, SayDelegate sayDel)
 {
     Console.Write("Chatbot says:");
@@ -15,6 +17,11 @@ void SayHello(string person)
 void SayBye(string person)
 {
     Console.WriteLine($"Bye {person}!");
+}
+
+void Say10Times(int count)
+{
+
 }
 #endregion
 
@@ -50,6 +57,35 @@ NumberMaster(2, 5, (x, y) =>
     if (x > y) return x;
     return y;
 });
+#endregion
+
+
+//Publisher/Subscriber model
+#region Event, Delegate, Publisher/Subscriber
+Publisher publisher = new Publisher();
+Subscriber subscriber = new Subscriber();
+Subscriber subscriber3 = new Subscriber();
+Subscriber subscriber4 = new Subscriber();
+Subscriber2 subscriber2 = new Subscriber2();
+
+//subsccribe to events that we want to receive info about
+publisher.DataProcessingHandler += subscriber.PrintMessage;
+publisher.DataProcessingHandler += subscriber2.PrintMessage;
+publisher.DataProcessingHandler += subscriber3.PrintMessage;
+publisher.DataProcessingIntHandler += subscriber4.PrintMessageInt;
+publisher.DataProcessingIntHandler += subscriber3.PrintMessageInt;
+
+//Process data in the publisher and notify all subscribed to events
+publisher.ProcessData("Procesiram mnogu podatoci.");
+publisher.ProcessInt(5);
+
+//unsubscribe from events
+publisher.DataProcessingHandler -= subscriber3.PrintMessage;
+publisher.DataProcessingIntHandler -= subscriber4.PrintMessageInt;
+
+//Process data in the publisher and notify all subscribed to events
+publisher.ProcessData("Procesiram mnogu podatoci 2.");
+publisher.ProcessInt(5);
 #endregion
 
 // Declaring delegates
