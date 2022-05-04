@@ -16,5 +16,10 @@ namespace Class08.TaxiManager9000.Services.Services
 
         public bool IsAvailableCar(Car car) =>
             car.IsLicenseExpired() == ExpieryStatusEnum.Expired || car.AssignedDrivers.Count == 3 ? false : true;
+
+        public void TestMethod()
+        {
+
+        }
     }
 }

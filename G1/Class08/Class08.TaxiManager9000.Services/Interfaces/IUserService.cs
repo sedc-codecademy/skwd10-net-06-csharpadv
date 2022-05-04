@@ -8,5 +8,6 @@ namespace Class08.TaxiManager9000.Services.Interfaces
         void Login(string username, string password);
         bool ChangePassword(int id, string oldPassword, string newPassword);
         void Seed(List<User> seedUsers);
+        List<User> GetUsersForRemoval();
     }
 }

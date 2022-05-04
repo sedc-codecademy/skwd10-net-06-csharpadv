@@ -7,7 +7,6 @@ namespace Class08.TaxiManager9000.Services.Interfaces
     {
         bool IsAvailableCar(Car car);
         void Seed(List<Car> seedCars);
-
         List<Car> GetAvailableCarsInShift(ShiftEnum shift);
     }
 }

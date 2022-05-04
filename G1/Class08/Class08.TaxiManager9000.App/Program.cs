@@ -1,12 +1,14 @@
 ﻿#region Setup
 using Class08.TaxiManager9000.Domain.Entities;
 using Class08.TaxiManager9000.Domain.Enums;
+using Class08.TaxiManager9000.Services.Helpers;
 using Class08.TaxiManager9000.Services.Interfaces;
 using Class08.TaxiManager9000.Services.Services;
 
 ICarService carService = new CarService();
 IDriverService driverService = new DriverService();
 IUserService userService = new UserService();
+IUIService uiService = new UIService();
 
 InitializeStartingData();
 #endregion
@@ -18,25 +20,14 @@ while (true)
     {
         try
         {
-            Console.WriteLine("Taxi Manager 9000");
-            Console.WriteLine("Log In:");
-            Console.Write("Username:");
-            string? username = Console.ReadLine();
-            Console.Write("Password:");
-            string? password = Console.ReadLine();
-            userService.Login(username, password);
+            User loginUser = uiService.LogIn();
+            userService.Login(loginUser.Username, loginUser.Password);
 
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine($"Successful Login! Welcome[{userService.CurrentUser.Role}] user!");
-            Console.ResetColor();
-            Console.ReadLine();
+            ConsoleHelper.WriteLine($"Successful Login! Welcome[{userService.CurrentUser.Role}] user!", ConsoleColor.Green);
         }
         catch (Exception ex)
         {
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine("Login unsuccessful. Please try again");
-            Console.ResetColor();
-            Console.ReadLine();
+            ConsoleHelper.WriteLine(ex.Message, ConsoleColor.Red);
             continue;
         }
     }
@@ -45,330 +36,382 @@ while (true)
     while (loopActive)
     {
         Console.Clear();
-        switch (userService.CurrentUser.Role)
+        #region Old code
+        //switch (userService.CurrentUser.Role)
+        //{
+        //    case RoleEnum.Administrator:
+        //        {
+        //            try
+        //            {
+        //                Console.Clear();
+        //                Console.WriteLine("1. Change Password");
+        //                Console.WriteLine("2. Add New User");
+        //                Console.WriteLine("3. Terminate User");
+        //                Console.WriteLine("4. Exit");
+        //                int selectedOption = int.Parse(Console.ReadLine());
+        //                if (selectedOption > 4 || selectedOption < 1)
+        //                {
+        //                    ConsoleHelper.WriteLine("Wrong selection, try again!", ConsoleColor.Red);
+        //                }
+
+        //                switch (selectedOption)
+        //                {
+        //                    case 1:
+        //                        {
+        //                            string oldPass = ConsoleHelper.GetInput("Insert old password: ");
+        //                            string newPass = ConsoleHelper.GetInput("Insert new password: ");
+        //                            if (userService.ChangePassword(userService.CurrentUser.Id, oldPass, newPass))
+        //                            {
+        //                                ConsoleHelper.WriteLine("Password changed!", ConsoleColor.Green);
+        //                            }
+        //                            break;
+        //                        }
+        //                    case 2:
+        //                        {
+        //                            try
+        //                            {
+        //                                string username = ConsoleHelper.GetInput("Username:");
+        //                                string password = ConsoleHelper.GetInput("Password:");
+        //                                List<string> roles = new List<string>() { "Administrator", "Manager", "Maintenance" };
+        //                                int enumInt = uiService.ChooseMenu(roles);
+
+        //                                if (enumInt < 0 || enumInt > 2)
+        //                                {
+        //                                    ConsoleHelper.WriteLine("Invalid role selection!", ConsoleColor.Red);
+        //                                    break;
+        //                                }
+
+        //                                RoleEnum role = (RoleEnum)enumInt;
+        //                                User user = new User(username, password, role);
+        //                                userService.Add(user);
+
+        //                                ConsoleHelper.WriteLine("New User Added", ConsoleColor.Green);
+        //                            }
+        //                            catch (Exception ex)
+        //                            {
+        //                                ConsoleHelper.WriteLine(ex.Message, ConsoleColor.Red);
+        //                            }
+        //                            break;
+        //                        }
+        //                    case 3:
+        //                        {
+        //                            try
+        //                            {
+        //                                Console.WriteLine("Select User For Removal (insert number in front of username):");
+        //                                userService.GetAll().ForEach(x => Console.WriteLine(x.Print()));
+
+        //                                if (userService.Remove(int.Parse(Console.ReadLine())))
+        //                                {
+        //                                    ConsoleHelper.WriteLine("User removed", ConsoleColor.Yellow);
+        //                                }
+        //                                else
+        //                                {
+        //                                    ConsoleHelper.WriteLine("User does not exist", ConsoleColor.Red);
+        //                                }
+        //                            }
+        //                            catch (Exception ex)
+        //                            {
+        //                                ConsoleHelper.WriteLine(ex.Message, ConsoleColor.Red);
+        //                            }
+        //                            break;
+        //                        }
+        //                    case 4:
+        //                        {
+        //                            userService.CurrentUser = null;
+        //                            loopActive = false;
+        //                            break;
+        //                        }
+        //                }
+        //            }
+        //            catch (Exception ex)
+        //            {
+        //                ConsoleHelper.WriteLine("Invalid input, try again!", ConsoleColor.Red);
+        //            }
+        //        }
+        //        break;
+        //    case RoleEnum.Manager:
+        //        {
+        //            Console.Clear();
+        //            Console.WriteLine("1. Change Password");
+        //            Console.WriteLine("2. List All Drivers");
+        //            Console.WriteLine("3. Check Taxi License Status");
+        //            Console.WriteLine("4. Assign Unassigned Drivers");
+        //            Console.WriteLine("5. Unasign Assigned Drivers");
+        //            Console.WriteLine("6. Exit");
+
+        //            int selectedOption = int.Parse(Console.ReadLine());
+
+        //            switch (selectedOption)
+        //            {
+        //                case 1:
+        //                    {
+        //                        string oldPass = ConsoleHelper.GetInput("Insert old password: ");
+        //                        string newPass = ConsoleHelper.GetInput("Insert new password: ");
+        //                        if (userService.ChangePassword(userService.CurrentUser.Id, oldPass, newPass))
+        //                        {
+        //                            ConsoleHelper.WriteLine("Password changed!", ConsoleColor.Green);
+        //                        }
+        //                        break;
+        //                    }
+        //                case 2:
+        //                    {
+        //                        driverService.GetAll().ForEach(x => Console.WriteLine(x.Print()));
+        //                        Console.ReadLine();
+        //                        break;
+        //                    }
+        //                case 3:
+        //                    {
+        //                        carService.GetAll().ForEach(x =>
+        //                        {
+        //                            var status = x.IsLicenseExpired();
+
+        //                            switch (status)
+        //                            {
+        //                                case ExpieryStatusEnum.Expired:
+        //                                    Console.ForegroundColor = ConsoleColor.Red;
+        //                                    break;
+        //                                case ExpieryStatusEnum.Valid:
+        //                                    Console.ForegroundColor = ConsoleColor.Green;
+        //                                    break;
+        //                                case ExpieryStatusEnum.Warning:
+        //                                    Console.ForegroundColor = ConsoleColor.Yellow;
+        //                                    break;
+        //                            }
+
+        //                            Console.WriteLine(x.Print());
+        //                            Console.ResetColor();
+        //                        });
+        //                        Console.ReadLine();
+        //                        break;
+        //                    }
+        //                case 4:
+        //                    {
+        //                        try
+        //                        {
+        //                            Console.Clear();
+        //                            Console.WriteLine("============= Assign Unassigned Drivers ============");
+        //                            Console.WriteLine("Select Driver (insert ID in front of name):");
+        //                            driverService.GetUnassignedDrivers().ForEach(x => Console.WriteLine(x.Print()));
+        //                            int driverId = int.Parse(Console.ReadLine());
+        //                            ConsoleHelper.Separator();
+        //                            List<string> shifts = new List<string>() { "Morning", "Afternoon", "Evening" };
+        //                            int shiftId = uiService.ChooseMenu(shifts);
+        //                            ConsoleHelper.Separator();
+        //                            Console.WriteLine("Select from available cars (insert id in front of the car):");
+        //                            carService.GetAvailableCarsInShift((ShiftEnum)shiftId).ForEach(x => Console.WriteLine(x.Print()));
+        //                            int carID = int.Parse(Console.ReadLine());
+        //                            Driver driverToUpdate = driverService.GetById(driverId);
+        //                            if (driverToUpdate != null)
+        //                            {
+        //                                driverToUpdate.Shift = (ShiftEnum)shiftId;
+        //                                Car carToUpdate = carService.GetById(carID);
+        //                                driverToUpdate.Car = carToUpdate;
+        //                                carToUpdate.AssignedDrivers.Add(driverToUpdate);
+        //                                Console.WriteLine("Driver Assignment Finished");
+        //                                Console.ReadLine();
+        //                            }
+        //                        }
+        //                        catch (Exception ex)
+        //                        {
+        //                            Console.ForegroundColor = ConsoleColor.Red;
+        //                            Console.WriteLine("Assignment failed. Please try again");
+        //                            Console.ResetColor();
+        //                            Console.ReadLine();
+        //                        }
+        //                        break;
+        //                    }
+        //                case 5:
+        //                    {
+        //                        try
+        //                        {
+        //                            Console.Clear();
+        //                            Console.WriteLine("============= Assign Unassigned Drivers ============");
+        //                            Console.WriteLine("Select Driver (insert ID in front of name):");
+        //                            driverService.GetAssignedDrivers().ForEach(x => Console.WriteLine(x.Print()));
+        //                            int driverId = int.Parse(Console.ReadLine());
+        //                            Driver driverToUnassign = driverService.GetById(driverId);
+        //                            Car carToUpdate = carService.GetById(driverToUnassign.Car.Id);
+        //                            var assignedDriver = carToUpdate.AssignedDrivers.FirstOrDefault(x => x.Id == driverToUnassign.Id);
+        //                            if (assignedDriver != null)
+        //                            {
+        //                                carToUpdate.AssignedDrivers.Remove(assignedDriver);
+        //                            }
+        //                            driverToUnassign.Car = null;
+        //                            driverToUnassign.Shift = ShiftEnum.NoShift;
+        //                        }
+        //                        catch (Exception ex)
+        //                        {
+        //                            Console.ForegroundColor = ConsoleColor.Red;
+        //                            Console.WriteLine("Unassignment failed. Please try again");
+        //                            Console.ResetColor();
+        //                            Console.ReadLine();
+        //                        }
+        //                        break;
+        //                    }
+        //                case 6:
+        //                    {
+        //                        userService.CurrentUser = null;
+        //                        loopActive = false;
+        //                        break;
+        //                    }
+        //            }
+        //        }
+        //        break;
+        //    case RoleEnum.Maintenance:
+        //        {
+        //            Console.Clear();
+        //            Console.WriteLine("1. Change Password");
+        //            Console.WriteLine("2. List All Vehicles");
+        //            Console.WriteLine("3. Check Taxi License Status");
+        //            Console.WriteLine("4. Exit");
+
+        //            int selectedOption = int.Parse(Console.ReadLine());
+
+        //            switch (selectedOption)
+        //            {
+        //                case 1:
+        //                    {
+        //                        Console.Write("Insert old password: ");
+        //                        string oldPass = Console.ReadLine();
+        //                        Console.Write("Insert new password: ");
+        //                        string newPass = Console.ReadLine();
+        //                        if (userService.ChangePassword(userService.CurrentUser.Id, oldPass, newPass))
+        //                        {
+        //                            Console.ForegroundColor = ConsoleColor.Green;
+        //                            Console.WriteLine("Password changed!");
+        //                            Console.ResetColor();
+        //                            Console.ReadLine();
+        //                        }
+        //                        break;
+        //                    }
+        //                case 2:
+        //                    {
+        //                        carService.GetAll().ForEach(x => Console.WriteLine(x.Print()));
+        //                        Console.ReadLine();
+        //                        break;
+        //                    }
+        //                case 3:
+        //                    {
+        //                        carService.GetAll().ForEach(x =>
+        //                        {
+        //                            var status = x.IsLicenseExpired();
+
+        //                            switch (status)
+        //                            {
+        //                                case ExpieryStatusEnum.Expired:
+        //                                    Console.ForegroundColor = ConsoleColor.Red;
+        //                                    break;
+        //                                case ExpieryStatusEnum.Valid:
+        //                                    Console.ForegroundColor = ConsoleColor.Green;
+        //                                    break;
+        //                                case ExpieryStatusEnum.Warning:
+        //                                    Console.ForegroundColor = ConsoleColor.Yellow;
+        //                                    break;
+        //                            }
+
+        //                            Console.WriteLine(x.Print());
+        //                            Console.ResetColor();
+        //                        });
+        //                        Console.ReadLine();
+        //                        break;
+        //                    }
+        //                case 4:
+        //                    {
+        //                        userService.CurrentUser = null;
+        //                        loopActive = false;
+        //                        break;
+        //                    }
+        //            }
+        //            break;
+        //        }
+        //}
+        #endregion
+
+        int selectedItem = uiService.MainMenu(userService.CurrentUser.Role);
+        if (selectedItem == -1)
         {
-            case RoleEnum.Administrator:
+            ConsoleHelper.WriteLine("Wrong option Selected", ConsoleColor.Red);
+            continue;
+        }
+        MenuOptions choise = uiService.MenuChoice[selectedItem-1];
+        switch (choise)
+        {
+            case MenuOptions.AddNewUser:
                 {
                     try
                     {
-                        Console.Clear();
-                        Console.WriteLine("1. Change Password");
-                        Console.WriteLine("2. Add New User");
-                        Console.WriteLine("3. Terminate User");
-                        Console.WriteLine("4. Exit");
-                        int selectedOption = int.Parse(Console.ReadLine());
-                        if (selectedOption > 4 || selectedOption < 1)
+                        string username = ConsoleHelper.GetInput("Username:");
+                        string password = ConsoleHelper.GetInput("Password:");
+                        List<string> roles = new List<string>() { "Administrator", "Manager", "Maintenance" };
+                        int enumInt = uiService.ChooseMenu(roles);
+
+                        if (enumInt < 0 || enumInt > 2)
                         {
-                            Console.ForegroundColor = ConsoleColor.Red;
-                            Console.WriteLine("Wrong selection, try again!");
-                            Console.ResetColor();
-                            Console.ReadLine();
+                            ConsoleHelper.WriteLine("Invalid role selection!", ConsoleColor.Red);
+                            break;
                         }
 
-                        switch (selectedOption)
+                        RoleEnum role = (RoleEnum)enumInt;
+                        User user = new User(username, password, role);
+                        userService.Add(user);
+
+                        ConsoleHelper.WriteLine("New User Added", ConsoleColor.Green);
+                    }
+                    catch (Exception ex)
+                    {
+                        ConsoleHelper.WriteLine(ex.Message, ConsoleColor.Red);
+                    }
+                    break;
+                }
+            case MenuOptions.RemoveExistingUser:
+                {
+                    try
+                    {
+                        Console.WriteLine("Select User For Removal (insert number in front of username):");
+                        int selectedUser = uiService.ChooseEntityMenu(userService.GetUsersForRemoval());
+                        if (selectedUser == -1)
                         {
-                            case 1:
-                                {
-                                    Console.Write("Insert old password: ");
-                                    string oldPass = Console.ReadLine();
-                                    Console.Write("Insert new password: ");
-                                    string newPass = Console.ReadLine();
-                                    if (userService.ChangePassword(userService.CurrentUser.Id, oldPass, newPass))
-                                    {
-                                        Console.ForegroundColor = ConsoleColor.Green;
-                                        Console.WriteLine("Password changed!");
-                                        Console.ResetColor();
-                                        Console.ReadLine();
-                                    }
-                                    break;
-                                }
-                            case 2:
-                                {
-                                    try
-                                    {
-                                        Console.Write("Username:");
-                                        string username = Console.ReadLine();
-                                        Console.Write("Password:");
-                                        string password = Console.ReadLine();
-                                        Console.WriteLine("Select Role: 1. Administrator, 2. Manager, 3. Maintenance");
-                                        int enumInt = int.Parse(Console.ReadLine()) - 1;
-                                        if (enumInt < 0 || enumInt > 2)
-                                        {
+                            ConsoleHelper.WriteLine("Wrong option Selected", ConsoleColor.Red);
+                            continue;
+                        }
 
-                                            Console.ForegroundColor = ConsoleColor.Red;
-                                            Console.WriteLine("Invalid role selection!");
-                                            Console.ResetColor();
-                                            Console.ReadLine();
-                                            break;
-                                        }
-
-                                        RoleEnum role = (RoleEnum)enumInt;
-                                        User user = new User(username, password, role);
-                                        userService.Add(user);
-
-                                        Console.ForegroundColor = ConsoleColor.Green;
-                                        Console.WriteLine("New User Added");
-                                        Console.ResetColor();
-                                        Console.ReadLine();
-                                    }
-                                    catch (Exception ex)
-                                    {
-                                        Console.ForegroundColor = ConsoleColor.Red;
-                                        Console.WriteLine(ex.Message);
-                                        Console.ResetColor();
-                                        Console.ReadLine();
-                                    }
-                                    break;
-                                }
-                            case 3:
-                                {
-                                    try
-                                    {
-                                        Console.WriteLine("Select User For Removal (insert number in front of username):");
-                                        userService.GetAll().ForEach(x => Console.WriteLine(x.Print()));
-
-                                        if (userService.Remove(int.Parse(Console.ReadLine())))
-                                        {
-                                            Console.ForegroundColor = ConsoleColor.Yellow;
-                                            Console.WriteLine("User removed");
-                                            Console.ResetColor();
-                                            Console.ReadLine();
-                                        }
-                                        else
-                                        {
-                                            Console.ForegroundColor = ConsoleColor.Red;
-                                            Console.WriteLine("User does not exist");
-                                            Console.ResetColor();
-                                            Console.ReadLine();
-                                        }
-                                    }
-                                    catch (Exception ex)
-                                    {
-                                        Console.ForegroundColor = ConsoleColor.Red;
-                                        Console.WriteLine(ex.Message);
-                                        Console.ResetColor();
-                                        Console.ReadLine();
-                                    }
-                                    break;
-                                }
-                            case 4:
-                                {
-                                    userService.CurrentUser = null;
-                                    loopActive = false;
-                                    break;
-                                }
+                        if (userService.Remove(selectedUser))
+                        {
+                            ConsoleHelper.WriteLine("User removed", ConsoleColor.Yellow);
                         }
                     }
                     catch (Exception ex)
                     {
-                        Console.ForegroundColor = ConsoleColor.Red;
-                        Console.WriteLine("Invalid input, try again!");
-                        Console.ResetColor();
-                        Console.ReadLine();
+                        ConsoleHelper.WriteLine(ex.Message, ConsoleColor.Red);
                     }
+                    break;
                 }
-                break;
-            case RoleEnum.Manager:
+            case MenuOptions.ListAllDrivers:
                 {
-                    Console.Clear();
-                    Console.WriteLine("1. Change Password");
-                    Console.WriteLine("2. List All Drivers");
-                    Console.WriteLine("3. Check Taxi License Status");
-                    Console.WriteLine("4. Assign Unassigned Drivers");
-                    Console.WriteLine("5. Unasign Assigned Drivers");
-                    Console.WriteLine("6. Exit");
-
-                    int selectedOption = int.Parse(Console.ReadLine());
-
-                    switch (selectedOption)
-                    {
-                        case 1:
-                            {
-                                Console.Write("Insert old password: ");
-                                string oldPass = Console.ReadLine();
-                                Console.Write("Insert new password: ");
-                                string newPass = Console.ReadLine();
-                                if (userService.ChangePassword(userService.CurrentUser.Id, oldPass, newPass))
-                                {
-                                    Console.ForegroundColor = ConsoleColor.Green;
-                                    Console.WriteLine("Password changed!");
-                                    Console.ResetColor();
-                                    Console.ReadLine();
-                                }
-                                break;
-                            }
-                        case 2:
-                            {
-                                driverService.GetAll().ForEach(x => Console.WriteLine(x.Print()));
-                                Console.ReadLine();
-                                break;
-                            }
-                        case 3:
-                            {
-                                carService.GetAll().ForEach(x =>
-                                {
-                                    var status = x.IsLicenseExpired();
-
-                                    switch (status)
-                                    {
-                                        case ExpieryStatusEnum.Expired:
-                                            Console.ForegroundColor = ConsoleColor.Red;
-                                            break;
-                                        case ExpieryStatusEnum.Valid:
-                                            Console.ForegroundColor = ConsoleColor.Green;
-                                            break;
-                                        case ExpieryStatusEnum.Warning:
-                                            Console.ForegroundColor = ConsoleColor.Yellow;
-                                            break;
-                                    }
-
-                                    Console.WriteLine(x.Print());
-                                    Console.ResetColor();
-                                });
-                                Console.ReadLine();
-                                break;
-                            }
-                        case 4:
-                            {
-                                try
-                                {
-                                    Console.Clear();
-                                    Console.WriteLine("============= Assign Unassigned Drivers ============");
-                                    Console.WriteLine("Select Driver (insert ID in front of name):");
-                                    driverService.GetUnassignedDrivers().ForEach(x => Console.WriteLine(x.Print()));
-                                    int driverId = int.Parse(Console.ReadLine());
-                                    Console.WriteLine("=============================================================");
-                                    Console.WriteLine("Select shift:");
-                                    Console.WriteLine("1. Morning");
-                                    Console.WriteLine("2. Afternoon");
-                                    Console.WriteLine("3. Evening");
-                                    int shiftId = int.Parse(Console.ReadLine());
-                                    Console.WriteLine("=============================================================");
-                                    Console.WriteLine("Select from available cars (insert id in front of the car):");
-                                    carService.GetAvailableCarsInShift((ShiftEnum)shiftId).ForEach(x => Console.WriteLine(x.Print()));
-                                    int carID = int.Parse(Console.ReadLine());
-                                    Driver driverToUpdate = driverService.GetById(driverId);
-                                    if (driverToUpdate != null)
-                                    {
-                                        driverToUpdate.Shift = (ShiftEnum)shiftId;
-                                        Car carToUpdate = carService.GetById(carID);
-                                        driverToUpdate.Car = carToUpdate;
-                                        carToUpdate.AssignedDrivers.Add(driverToUpdate);
-                                        Console.WriteLine("Driver Assignment Finished");
-                                        Console.ReadLine();
-                                    }
-                                }
-                                catch (Exception ex)
-                                {
-                                    Console.ForegroundColor = ConsoleColor.Red;
-                                    Console.WriteLine("Assignment failed. Please try again");
-                                    Console.ResetColor();
-                                    Console.ReadLine();
-                                }
-                                break;
-                            }
-                        case 5:
-                            {
-                                try
-                                {
-                                    Console.Clear();
-                                    Console.WriteLine("============= Assign Unassigned Drivers ============");
-                                    Console.WriteLine("Select Driver (insert ID in front of name):");
-                                    driverService.GetAssignedDrivers().ForEach(x => Console.WriteLine(x.Print()));
-                                    int driverId = int.Parse(Console.ReadLine());
-                                    Driver driverToUnassign = driverService.GetById(driverId);
-                                    Car carToUpdate = carService.GetById(driverToUnassign.Car.Id);
-                                    var assignedDriver = carToUpdate.AssignedDrivers.FirstOrDefault(x => x.Id == driverToUnassign.Id);
-                                    if (assignedDriver != null)
-                                    {
-                                        carToUpdate.AssignedDrivers.Remove(assignedDriver);
-                                    }
-                                    driverToUnassign.Car = null;
-                                    driverToUnassign.Shift = ShiftEnum.NoShift;
-                                }
-                                catch (Exception ex)
-                                {
-                                    Console.ForegroundColor = ConsoleColor.Red;
-                                    Console.WriteLine("Unassignment failed. Please try again");
-                                    Console.ResetColor();
-                                    Console.ReadLine();
-                                }
-                                break;
-                            }
-                        case 6:
-                            {
-                                userService.CurrentUser = null;
-                                loopActive = false;
-                                break;
-                            }
-                    }
+                    break;
                 }
-                break;
-            case RoleEnum.Maintenance:
+            case MenuOptions.TaxiLicenseStatus:
                 {
-                    Console.Clear();
-                    Console.WriteLine("1. Change Password");
-                    Console.WriteLine("2. List All Vehicles");
-                    Console.WriteLine("3. Check Taxi License Status");
-                    Console.WriteLine("4. Exit");
-
-                    int selectedOption = int.Parse(Console.ReadLine());
-
-                    switch (selectedOption)
+                    break;
+                }
+            case MenuOptions.DriverManager:
+                {
+                    break;
+                }
+            case MenuOptions.ChangePassword:
+                {
+                    string oldPass = ConsoleHelper.GetInput("Insert old password: ");
+                    string newPass = ConsoleHelper.GetInput("Insert new password: ");
+                    if (userService.ChangePassword(userService.CurrentUser.Id, oldPass, newPass))
                     {
-                        case 1:
-                            {
-                                Console.Write("Insert old password: ");
-                                string oldPass = Console.ReadLine();
-                                Console.Write("Insert new password: ");
-                                string newPass = Console.ReadLine();
-                                if (userService.ChangePassword(userService.CurrentUser.Id, oldPass, newPass))
-                                {
-                                    Console.ForegroundColor = ConsoleColor.Green;
-                                    Console.WriteLine("Password changed!");
-                                    Console.ResetColor();
-                                    Console.ReadLine();
-                                }
-                                break;
-                            }
-                        case 2:
-                            {
-                                carService.GetAll().ForEach(x => Console.WriteLine(x.Print()));
-                                Console.ReadLine();
-                                break;
-                            }
-                        case 3:
-                            {
-                                carService.GetAll().ForEach(x =>
-                                {
-                                    var status = x.IsLicenseExpired();
-
-                                    switch (status)
-                                    {
-                                        case ExpieryStatusEnum.Expired:
-                                            Console.ForegroundColor = ConsoleColor.Red;
-                                            break;
-                                        case ExpieryStatusEnum.Valid:
-                                            Console.ForegroundColor = ConsoleColor.Green;
-                                            break;
-                                        case ExpieryStatusEnum.Warning:
-                                            Console.ForegroundColor = ConsoleColor.Yellow;
-                                            break;
-                                    }
-
-                                    Console.WriteLine(x.Print());
-                                    Console.ResetColor();
-                                });
-                                Console.ReadLine();
-                                break;
-                            }
-                        case 4:
-                            {
-                                userService.CurrentUser = null;
-                                loopActive = false;
-                                break;
-                            }
+                        ConsoleHelper.WriteLine("Password changed!", ConsoleColor.Green);
                     }
+                    break;
+                }
+            case MenuOptions.Exit:
+                {
+                    userService.CurrentUser = null;
+                    loopActive = false;
                     break;
                 }
         }

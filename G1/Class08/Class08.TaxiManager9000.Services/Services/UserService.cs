@@ -12,7 +12,7 @@ namespace Class08.TaxiManager9000.Services.Services
             CurrentUser = _db.GetAll().FirstOrDefault(x => x.Username == username && x.Password == password);
             if (CurrentUser == null)
             {
-                throw new Exception("Login failed. Please try again...");
+                throw new Exception("Login unsuccessful. Please try again");
             }
         }
 
@@ -29,6 +29,11 @@ namespace Class08.TaxiManager9000.Services.Services
                 Console.WriteLine("Incorect old password inserted");
                 return false;
             }
+        }
+
+        public List<User> GetUsersForRemoval()
+        {
+            return _db.GetAll().Where(x => x != CurrentUser).ToList();
         }
     }
 }

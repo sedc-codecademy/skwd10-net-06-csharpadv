@@ -14,6 +14,13 @@ namespace Class08.TaxiManager9000.Domain.Entities
             Password = password;
             Role = role;
         }
+
+        public User(string username, string password)
+        {
+            Username = username;
+            Password = password;
+        }
+
         public override string Print()
         {
             return $"User {Id} - {Username} and role {Role}";
