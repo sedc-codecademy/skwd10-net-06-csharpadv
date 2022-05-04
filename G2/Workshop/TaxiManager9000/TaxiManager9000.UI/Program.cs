@@ -5,38 +5,43 @@ using TaxiManager9000.Domain.Exceptions;
 using TaxiManager9000.Domain.Utils;
 using TaxiManager9000.Services;
 using TaxiManager9000.Services.Interfaces;
+using TaxiManager9000.Services.Services;
 using TaxiManager9000.UI.Helpers;
 using TaxiManager9000.UI.Utils;
 
 IAuthService authService = new AuthService();
+IMaintainanceService maintainanceService = new MaintainanceService();
 IAdminService adminService = new AdminService();
 
-StartApplication(authService, adminService);
+StartApplication(authService, adminService, maintainanceService);
 
 Console.ReadLine();
 
-void StartApplication(IAuthService authService, IAdminService adminService)
+void StartApplication(IAuthService authService, IAdminService adminService, IMaintainanceService maintainanceService)
 {
     ShowLogin(authService);
-    ShowMenu(authService, adminService);
+    ShowMenu(authService, adminService, maintainanceService);
 }
 
-void ShowMenu(IAuthService authService, IAdminService adminService)
+void ShowMenu(IAuthService authService, IAdminService adminService, IMaintainanceService maintainanceService)
 {
-    switch (authService.CurrentUser.Role)
+    if (authService.CurrentUser != null)
     {
-        case Role.Administrator:
-            ShowAdminMenu(adminService);
-            break;
-        case Role.Maintainance:
-            ShowMaintainenceMenu(authService);
-            break;
-        case Role.Manager:
-            ShowManagerMenu(authService);
-            break;
-        default:
-            ConsoleUtils.WriteLineInColor($"Invalid role, {authService.CurrentUser.Role}", ConsoleColor.Red);
-            break;
+        switch (authService.CurrentUser.Role)
+        {
+            case Role.Administrator:
+                ShowAdminMenu(adminService);
+                break;
+            case Role.Maintainance:
+                ShowMaintainenceMenu(maintainanceService);
+                break;
+            case Role.Manager:
+                ShowManagerMenu(authService);
+                break;
+            default:
+                ConsoleUtils.WriteLineInColor($"Invalid role, {authService.CurrentUser.Role}", ConsoleColor.Red);
+                break;
+        }
     }
 }
 
@@ -63,10 +68,27 @@ void ShowAdminMenu(IAdminService adminService)
             }
         case AdminMenuOptions.TERMINATE_USER:
             {
+                Console.WriteLine("All users:");
+                adminService.ListAllUsers().ForEach(x => Console.WriteLine(x.UserName));
+
                 Console.WriteLine("Enter username");
                 string userName = Console.ReadLine();
 
                 adminService.TerminateUser(userName);
+                break;
+            }
+        case AdminMenuOptions.CHANGE_USER_PASSWORD:
+            {
+                Console.WriteLine("Enter username");
+                string userName = Console.ReadLine();
+
+                Console.WriteLine("Enter password");
+                string password = Console.ReadLine();
+
+                Console.WriteLine("Enter new password");
+                string newPassword = Console.ReadLine();
+
+                adminService.ChangePassword(userName, password, newPassword);
                 break;
             }
         default:
@@ -74,9 +96,29 @@ void ShowAdminMenu(IAdminService adminService)
     }
 }
 
-void ShowMaintainenceMenu(IAuthService authService)
+void ShowMaintainenceMenu(IMaintainanceService maintainanceService)
 {
-    throw new NotImplementedException();
+    Console.WriteLine($"{MaintainenceMenuOptions.LIST_ALL_CARS}) List All Cars \n{MaintainenceMenuOptions.LICENSE_PLATE_STATUS}) Lincense plate status");
+    string input = Console.ReadLine();
+
+    switch (input)
+    {
+        case MaintainenceMenuOptions.LIST_ALL_CARS:
+            {
+                List<Car> cars = maintainanceService.ListAllCars();
+                foreach (Car car in cars)
+                {
+                    Console.WriteLine($"{car.Id}) {car.Model} with license plate {car.LicensePlate} and utilized {car.GetShiftPercentageUtilization().ToString("0.##")}%");
+                }
+                break;
+            }
+        case MaintainenceMenuOptions.LICENSE_PLATE_STATUS:
+            {
+                break;
+            }
+        default:
+            throw new ArgumentOutOfRangeException("Invalid input");
+    }
 }
 
 void ShowManagerMenu(IAuthService authService)

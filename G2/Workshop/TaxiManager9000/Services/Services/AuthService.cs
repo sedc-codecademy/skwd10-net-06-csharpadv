@@ -15,7 +15,7 @@ namespace TaxiManager9000.Services
 
         public AuthService()
         {
-            _database = DepencyResolver.GetService<IUserDatabase>();
+            _database = DependencyResolver.GetService<IUserDatabase>();
         }
 
         public void LogIn(string username, string password)

@@ -2,17 +2,15 @@
 
 namespace TaxiManager9000.Domain.Entities
 {
-    public class User
+    public class User : BaseEntity
     {
         private const int USERNAME_MIN_LENGTH = 5;
 
         private const int PASSWORD_MIN_LENGTH = 5;
 
-        public int Id { get; set; }
-
         public string UserName { get; set; }
     
-        public string Password { get; set; }  
+        public string Password { get; private set; }  
 
         public Role Role { get; set; }
 
@@ -22,7 +20,7 @@ namespace TaxiManager9000.Domain.Entities
         /// <param name="userName"></param>
         /// <param name="password"></param>
         /// <param name="role"></param>
-        public User(string userName, string password, Role role)
+        public User(string userName, string password, Role role) : base()
         {
             if (userName.Length < USERNAME_MIN_LENGTH)
             {
@@ -31,10 +29,16 @@ namespace TaxiManager9000.Domain.Entities
 
             ValidatePassword(password);
 
-            Id = -1;
             UserName = userName;
             Password = password;
             Role = role;
+        }
+
+        public void SetPassword(string password)
+        {
+            ValidatePassword(password);
+
+            Password = password;
         }
 
         private static void ValidatePassword(string password)

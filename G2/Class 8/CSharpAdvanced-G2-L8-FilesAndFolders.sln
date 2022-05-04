@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32328.378
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CSharpAdvanced-G2-L8-FilesAndFolders", "CSharpAdvanced-G2-L9-FilesAndFolders\CSharpAdvanced-G2-L8-FilesAndFolders.csproj", "{7DD4F159-F8FF-4B47-940B-293E1CFD751F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSharpAdvanced-G2-L8-Streams", "CSharpAdvanced-G2-L8-Streams\CSharpAdvanced-G2-L8-Streams.csproj", "{8696CC2A-F855-4F29-BF84-AEAD9312155E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7DD4F159-F8FF-4B47-940B-293E1CFD751F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7DD4F159-F8FF-4B47-940B-293E1CFD751F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7DD4F159-F8FF-4B47-940B-293E1CFD751F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7DD4F159-F8FF-4B47-940B-293E1CFD751F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8696CC2A-F855-4F29-BF84-AEAD9312155E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8696CC2A-F855-4F29-BF84-AEAD9312155E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8696CC2A-F855-4F29-BF84-AEAD9312155E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8696CC2A-F855-4F29-BF84-AEAD9312155E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2C0D107C-8302-4E8F-9F52-D33CB24B9D25}
+	EndGlobalSection
+EndGlobal
