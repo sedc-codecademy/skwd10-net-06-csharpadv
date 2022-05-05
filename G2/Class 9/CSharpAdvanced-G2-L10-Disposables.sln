@@ -5,6 +5,10 @@ VisualStudioVersion = 17.1.32328.378
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSharpAdvanced-G2-L10-Disposables", "CSharpAdvanced-G2-L10-Disposables\CSharpAdvanced-G2-L10-Disposables.csproj", "{CE9CF567-7AB9-44BD-8F4B-F1C6C1CD3215}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSharpAdvanced-G2-L10-NullableTypes", "CSharpAdvanced-G2-L10-NullableTypes\CSharpAdvanced-G2-L10-NullableTypes.csproj", "{C4A52BB8-D362-4505-AA02-0226A9B35B10}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSharpAdvanced-G2-L10-NamedAndOptionalParams", "CSharpAdvanced-G2-L10-NamedAndOptionalParams\CSharpAdvanced-G2-L10-NamedAndOptionalParams.csproj", "{920E6E3D-8D11-4078-8268-137E1D0D35D3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{CE9CF567-7AB9-44BD-8F4B-F1C6C1CD3215}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CE9CF567-7AB9-44BD-8F4B-F1C6C1CD3215}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CE9CF567-7AB9-44BD-8F4B-F1C6C1CD3215}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C4A52BB8-D362-4505-AA02-0226A9B35B10}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C4A52BB8-D362-4505-AA02-0226A9B35B10}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C4A52BB8-D362-4505-AA02-0226A9B35B10}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C4A52BB8-D362-4505-AA02-0226A9B35B10}.Release|Any CPU.Build.0 = Release|Any CPU
+		{920E6E3D-8D11-4078-8268-137E1D0D35D3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{920E6E3D-8D11-4078-8268-137E1D0D35D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{920E6E3D-8D11-4078-8268-137E1D0D35D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{920E6E3D-8D11-4078-8268-137E1D0D35D3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
