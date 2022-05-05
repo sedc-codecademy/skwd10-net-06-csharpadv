@@ -79,6 +79,7 @@ publisher.DataProcessingIntHandler += subscriber3.PrintMessageInt;
 publisher.ProcessData("Procesiram mnogu podatoci.");
 publisher.ProcessInt(5);
 
+Console.ReadLine();
 //unsubscribe from events
 publisher.DataProcessingHandler -= subscriber3.PrintMessage;
 publisher.DataProcessingIntHandler -= subscriber4.PrintMessageInt;
