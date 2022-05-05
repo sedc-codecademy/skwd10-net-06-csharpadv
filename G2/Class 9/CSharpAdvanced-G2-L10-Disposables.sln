@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32328.378
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSharpAdvanced-G2-L10-Disposables", "CSharpAdvanced-G2-L10-Disposables\CSharpAdvanced-G2-L10-Disposables.csproj", "{CE9CF567-7AB9-44BD-8F4B-F1C6C1CD3215}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CE9CF567-7AB9-44BD-8F4B-F1C6C1CD3215}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CE9CF567-7AB9-44BD-8F4B-F1C6C1CD3215}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CE9CF567-7AB9-44BD-8F4B-F1C6C1CD3215}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CE9CF567-7AB9-44BD-8F4B-F1C6C1CD3215}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {327EAE04-D2A2-40C2-91D5-78E3ACEA6184}
+	EndGlobalSection
+EndGlobal
