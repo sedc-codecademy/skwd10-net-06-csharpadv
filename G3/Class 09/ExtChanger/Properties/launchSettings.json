@@ -1,0 +1,13 @@
+{
+  "profiles": {
+    "ExtChanger": {
+      "commandName": "Project",
+      "commandLineArgs": "TextFile1.txt log"
+    },
+    "ExtChanger2": {
+      "commandName": "Project",
+      "commandLineArgs": "TextFile1.txt log"
+    }
+
+  }
+}

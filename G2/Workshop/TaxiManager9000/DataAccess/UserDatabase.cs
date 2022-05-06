@@ -3,7 +3,7 @@ using TaxiManager9000.Domain.Entities;
 
 namespace TaxiManager9000.DataAccess
 {
-    public class UserDatabase : IUserDatabase
+    public class UserDatabase : Database<User>, IUserDatabase
     {
         private readonly List<User> _users;
 
@@ -11,13 +11,6 @@ namespace TaxiManager9000.DataAccess
         {
             _users = new List<User>();
             Seed();
-        }
-
-        public void Insert(User user)
-        {
-            User userToInsert = AutoIncrementId(user);
-
-            _users.Add(userToInsert);
         }
 
         public User GetByUserNameAndPassword(string username, string password)
@@ -29,25 +22,6 @@ namespace TaxiManager9000.DataAccess
         public User GetByUserName(string username)
         {
             return _users.FirstOrDefault(user => user.UserName == username);
-        }
-
-        public void Remove(User user)
-        {
-            _users.Remove(user);
-        }
-
-        private User AutoIncrementId(User user)
-        {
-            int currentId = 0;
-
-            if (_users.Count > 0)
-            {
-                currentId = _users.OrderByDescending(x => x.Id).First().Id;
-            }
-
-            user.Id = ++currentId;
-
-            return user;
         }
 
         private void Seed()

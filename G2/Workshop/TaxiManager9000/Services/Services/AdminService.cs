@@ -9,12 +9,11 @@ namespace TaxiManager9000.Services
 {
     public class AdminService : IAdminService
     {
-        private readonly IUserDatabase _database;
-        private readonly IAuthService _authService;
+        private readonly IUserDatabase _database; 
 
         public AdminService()
         {
-            _database = DepencyResolver.GetService<IUserDatabase>();
+            _database = DependencyResolver.GetService<IUserDatabase>();
         }
 
         public void AddUser(string userName, string password, Role role)
@@ -31,9 +30,25 @@ namespace TaxiManager9000.Services
             _database.Insert(user);
         }
 
-        public void ChangePassword(string userName, string password)
+        public List<User> ListAllUsers()
         {
-            throw new NotImplementedException();
+            List<User> users = _database.GetAll();
+
+            return users;
+        }
+
+        public void ChangePassword(string userName, string password, string newPassword)
+        {
+            User existingUser = _database.GetByUserNameAndPassword(userName, password);
+
+            if (existingUser == null)
+            {
+                throw new NotFoundException($"The user {userName} does not exist");
+            }
+
+            existingUser.SetPassword(newPassword);
+
+            _database.Update(existingUser);
         }
 
         public void TerminateUser(string userName)
