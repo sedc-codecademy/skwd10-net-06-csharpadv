@@ -5,6 +5,8 @@ VisualStudioVersion = 17.1.32328.378
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSharpAdvanced-G2-L10-SerializationDeserialization", "CSharpAdvanced-G2-L10-SerializationDeserialization\CSharpAdvanced-G2-L10-SerializationDeserialization.csproj", "{41701119-2E12-4BA4-A3AB-FA2F51DB15AB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSharpAdvanced-G2-L10-FileDb", "CSharpAdvanced-G2-L10-FileDb\CSharpAdvanced-G2-L10-FileDb.csproj", "{66A35290-4972-43C5-88F8-1AD705C534AF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{41701119-2E12-4BA4-A3AB-FA2F51DB15AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{41701119-2E12-4BA4-A3AB-FA2F51DB15AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{41701119-2E12-4BA4-A3AB-FA2F51DB15AB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{66A35290-4972-43C5-88F8-1AD705C534AF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{66A35290-4972-43C5-88F8-1AD705C534AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{66A35290-4972-43C5-88F8-1AD705C534AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{66A35290-4972-43C5-88F8-1AD705C534AF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
