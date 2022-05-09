@@ -15,6 +15,18 @@ namespace FileManager
 
         public static int Execute (int first, int second, Operation op)
         {
+            // var num = 2;
+            //var doublev = num switch
+            //{
+            //    1 => 2,
+            //    2 => 4,
+            //    3 => 6,
+            //    4 => 8,
+            //    5 => 10,
+            //    6 => 12,
+            //    int n => n * 2,
+            //};
+
             var result = op switch
             {
                 Operation.Add => Add(first, second),
