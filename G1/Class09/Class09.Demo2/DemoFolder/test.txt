@@ -1,0 +1,3 @@
+First line added using stream writer
+Second line added using stream writer
+Third line added using stream writer

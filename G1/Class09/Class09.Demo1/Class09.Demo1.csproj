@@ -7,4 +7,14 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="DemoFolder002\**" />
+    <EmbeddedResource Remove="DemoFolder002\**" />
+    <None Remove="DemoFolder002\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="DemoFolder001\" />
+  </ItemGroup>
+
 </Project>

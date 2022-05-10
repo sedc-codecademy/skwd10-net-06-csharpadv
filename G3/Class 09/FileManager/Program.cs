@@ -8,3 +8,4 @@ var op = reader.ReadOperation();
 var result = Calculate.Execute(first, second, op);
 
 Console.WriteLine(result);
+
