@@ -7,7 +7,7 @@ Console.WriteLine(currentDirectory);
 string absolutePath = @"C:\Projects\SEDC\skwd10-net-06-csharpadv\G1\Class09\Class09.Demo1";
 string relativePath = "../../../";
 string relativeFolderPath = "../../../DemoFolder/";
-
+Console.ReadLine();
 Console.WriteLine("=========================== FOLDER ==============================");
 Console.WriteLine("Check If Folder Exists");
 Console.WriteLine();
