@@ -146,3 +146,13 @@ var isZero = x switch
     > 0 or < 0 => false,
     _ => true,
 };
+
+//var cleanValue = input switch
+//{
+//    checkOne => throw new ExceptionOne(),
+//    checkOne => throw new ExceptionOne(),
+//    checkOne => throw new ExceptionOne(),
+//    checkOne => throw new ExceptionOne(),
+//    checkOne => throw new ExceptionOne(),
+//    _ => input.Trim()
+//};

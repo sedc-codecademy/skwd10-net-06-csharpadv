@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace FancyCalculator
 {
 
-    internal class Calculator
+    internal class Calculator: ICalculator
     {
         public static int Add(int first, int second) => first + second;
         public static int Divide(int first, int second) => first / second;
@@ -36,6 +36,11 @@ namespace FancyCalculator
             var function = operations[op];
             var result = function(first, second);
             return result;
+        }
+
+        public Operation Resolve(string symbol)
+        {
+            return operations.Keys.FirstOrDefault(op => op.Symbol == symbol);
         }
     }
 }
