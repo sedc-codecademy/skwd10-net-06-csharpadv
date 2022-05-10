@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32328.378
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SerializeDeserialize", "SerializeDeserialize\SerializeDeserialize.csproj", "{46ED3CDE-2610-4B20-9AA8-E4414DB771F2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileSystemDatabase", "FileSystemDatabase\FileSystemDatabase.csproj", "{79F0EF3A-0BE1-4E12-B180-A29CEA08C703}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{46ED3CDE-2610-4B20-9AA8-E4414DB771F2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{46ED3CDE-2610-4B20-9AA8-E4414DB771F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{46ED3CDE-2610-4B20-9AA8-E4414DB771F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{46ED3CDE-2610-4B20-9AA8-E4414DB771F2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{79F0EF3A-0BE1-4E12-B180-A29CEA08C703}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{79F0EF3A-0BE1-4E12-B180-A29CEA08C703}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{79F0EF3A-0BE1-4E12-B180-A29CEA08C703}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{79F0EF3A-0BE1-4E12-B180-A29CEA08C703}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8447D426-939E-4FED-A5BE-C9CE242F18D5}
+	EndGlobalSection
+EndGlobal
