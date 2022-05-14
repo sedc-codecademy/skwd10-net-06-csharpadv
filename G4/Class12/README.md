@@ -1,91 +1,131 @@
-# C# Conventions, Practices, and Principles
+# Asynchronous programming with C# 🍥
 
-## Good Practices 🚀
+## Asynchronous execution🔹
 
-In C# as in any other language, there are some Good Practices or Invisible Rules that we need to follow for our code to be better, more efficient, and for the most part, better understood. Keeping up with good practices and conventions can result in scalable, readable, and easy to maintain code. Sometimes we find ourselves writing code that doesn't follow some of these practices, but we must always strive to make our code as good as we possibly can. Here are some good practices that can be used to write better C# code:
+When programming, we expect the code to be executed in the order that we wrote it. We also expect that every line of code needs to wait for the previous one so that it can start executing. This is logical. We declare a variable, then get that variable and use it. We create an if statement and then write code that correlates to that condition. But there are cases where this execution actually hinders our application and can slow down or completely stop the execution flow. This could happen when we are expecting some data from an external source such as a server or file system and that response that we are waiting for is taking a long time. There are also cases where we need to execute something while we are running the code, something that is not dependent on the rest of the code and can be executed by itself at the point when it is done doing some work. In all these scenarios, asynchronous code is the way to go. Asynchronous programming is programming with code that can be executed, finish and give results without waiting for some other code. With it, we create multiple execution tracks that execute code in parallel or just wait until they get some information or response from some other source.  
+![Asynchronous execution](img/async1.jpg)
 
-### Naming ☄
+## Threads🔹
 
-* **Variables** and **Parameters** are always written in **camelCase**
-* **Classes, Methods, Properties** are written in **PascalCase**
-* **Private fields** are always written with **underscore camelCase** ( ex: \_privateField )
+When any code that we run in our console application starts, there is an execution path allocated for that code to run. That execution path is called a thread. This thread is automatically created and it is called the main thread. When code is executed synchronously, the code is executed on this thread only. But when we want to execute code asynchronously this is where it gets interesting. While our main thread is running some code and we decide to run something asynchronously, another thread is created and it starts running the code that needs to be executed asynchronously. We can have multiple of these threads executing some code or waiting for some request at one time. When a thread is over with its code, it gets disposed of. This is one way of working with asynchronous code.
 
-### Properties and Fields ☄
+> Note: These threads are not always directly mapped to the threads of the processor
 
-* Use properties for values in any Class
-* Avoid using fields unless they are private
-* Use **private fields** to hide values and instances that are exclusive to a class and need to be hidden from the outside world
-* Write **boolean names** so that they can be answered with **yes or no** ( IsDeleted, CanLogin, HasCheckedIn )
-* Always add Exception suffix when creating custom Exception classes
-* Always add the I prefix when writing Interfaces
+![Threads execution](img/async2.jpg)
 
-### Methods ☄
+### Synchronous messages
 
-* Write Service Classes and group/organize methods
-* Keep methods short
-* Avoid too many parameters
-* If a method has too many lines of code or it has too many parameters, think about splitting it into multiple smaller methods if possible
+```csharp
+public static void SendMessages()
+{
+    Console.WriteLine("Getting Ready...");
+    Thread.Sleep(2000);
+    Console.WriteLine("First message arrived!");
+    Thread.Sleep(2000);
+    Console.WriteLine("Second message arrived!");
+    Thread.Sleep(2000);
+    Console.WriteLine("Third message arrived!");
+    Console.WriteLine("All messages are received!");
+    Console.ReadLine();
+}
+```
 
-### Loops ☄
+### Asynchronous messages
 
-* Use foreach whenever possible
-* Don't request fixed values inside a loop, declare a variable outside with the value
-* Use break if searching for a value to close the loop when data needed is found
-* Counters by convention have one letter name usually: i, j, k or i, ii, iii, etc.
+```csharp
+public static void SendMessagesWithThreads()
+{
+    Console.WriteLine("Getting Ready...");
+    Thread myThread = new Thread(() => {
+        Thread.Sleep(2000);
+        Console.WriteLine("First message arrived!");
+    });
+    myThread.Start();
+    new Thread(() =>
+    {
+        Thread.Sleep(2000);
+        Console.WriteLine("Second message arrived!");
+    }).Start();
+    new Thread(() =>
+    {
+        Thread.Sleep(2000);
+        Console.WriteLine("Third message arrived!");
+    }).Start();
+    Console.WriteLine("All messages are received!");
+    Console.ReadLine();
+}
+```
 
-### If/Else statements ☄
+## Tasks🔹
 
-* When writing an if statement that results in bool value in any way, don't use comparison with true or false
-* Invert If statements to see if you can make else redundant
-* Don't use one-liner ifs for more than one line of code
-* For longer if/else statements try using a switch instead
+The .NET framework provides another more easy-to-use solution to asynchronous programming in C#. Those are the Tasks. Tasks are a representation of some work that needs to be done. Unlike the threads in C#, Tasks are not opening a new execution path every time. There get queued to be executed asynchronously by an available thread. This is done by a system called the Thread Pool which is just a collection of threads that can manage tasks and execute them in a very efficient and organized way. This means that when we want to execute some work asynchronously we create a task, which is queued for execution, the thread pool decides on which thread the task will get executed and the task gets executed. Every phase of the task is kept in a status, so we can track whether the task completed its execution or if it is still in progress or even removed or did not complete the execution successfully.
+![Tasks and thread pool](img/async3.jpg)
 
-## Programming Principles 🎯
+### Running a single task
 
-Just like in any other craft and profession, some principles were laid over the years by professionals and the community that we can follow. These principles can serve as a foundation for good programming habits as well as a collection of rules to follow when writing and developing any kind of program. There are many principles, some more complicated than others. We are going to mention some of the most well-known.
+```csharp
+Task myTask = new Task(() =>
+{
+    Thread.Sleep(2000);
+    Console.WriteLine("Running after 2000ms");
+});
 
-### SOLID 🌟
+myTask.Start();
+```
 
-Writing code and building applications are always hard. It is hard because we are not building an application to work one time, but work and scale in the future. For this reason, if the code piles in one place, it can be really hard to maintain, scale, and add new features. The SOLID principles are a compilation of principles that set up a baseline for a good, scalable, and maintainable code.
+#### Running a single task with a return type
 
-* Single Responsibility ⭐
-  The single responsibility principle tackles the problems mentioned above by adding a rule that every organizational entity ( Ex: class, module, etc. ) should have one responsibility and do stuff only for that thing. This means that every functionality of our software should be separated into a new entity ( in our example classes ) and when we add new code we should add that code to the entity within that functional scope or create a new entity in which to store it. At the end of the day, there should be only one reason for changing an entity ( class ). This helps us to easily navigate through our application code and add new features easily. With this principle used, we can make our application more flexible and scalable.
-* Open-Closed ⭐
-  The Open-Closed principle gets its name by its two rules: Open for extension, closed for modification. This means that we need to look a bit in the future when writing our code and strive to make it generic and modular. When a new feature or changes need to be implemented in our code, we can just extend a class instead of changing some of the previously written code that worked. This by no means suggests that we never edit our classes and functions, but implies that we should avoid editing the code that already works and try and add new code that is independent as much as the situation allows us.
-* Liskov Substitution ⭐
-  The Liskov Substitution has a simple rule. If we have a parent class and that class has two derived classes from it, the derived classes can always substitute the parent and work correctly. We should always get the desired effect, accessing a method from a parent class with an instance of the child or accessing a parent class with an instance of its own. This in term helps with building more flexible and generic code when needed.
-* Interface Segregation ⭐
-  The interface segregation principle follows a simple rule. We don't want a class to implement an interface and be forced to hold a method it will not use. This can happen when we model our interfaces only by our classes and after reusing the interfaces we end up in a situation with extra methods that we never use. This is fixed with the interface segregation principle by creating interfaces for every logical scope. This way we can reuse interfaces and escape the problem of redundant methods in classes.
-* Dependency Inversion ⭐
-  The one thing that we need to strive for in our code is to have as much decoupled code as possible. Decoupled means that we don't want our code to be full of dependencies, we don't want all pieces of code to be dependent on one another. If we have tightly coupled code ( code full of dependencies ) and we try to change something we would quickly realize that we need to change a lot of code for that small change. This is a problem. We don't want to change tons of code for one small change and then test the whole application again because we did a lot of changes. This makes our code unreliable, hard to maintain, and hard to scale. The dependency inversion principle says that we need to abstract the dependencies that we have and ask for them from outside. This creates methods and classes that don't care about the dependency inside of their implementation. They request for an implementation of a certain abstraction and when they get it they do their job. In C# we can do that with Interfaces. We can request an interface and wait for the implementation of ANY class that implements that interface. Not only does this help us with decoupled code, but it also gives us the benefit of having flexible and scalable code.
+```csharp
+Task<int> valueTask = new Task<int>(() =>
+{
+    Thread.Sleep(2000);
+    Console.WriteLine("We can now get the number...");
+    return 6;
+});
 
-### Other well-known principles ⚡
+valueTask.Start();
+Console.WriteLine(valueTask.Result);
+```
 
-* DRY ( Don't Repeat Yourself )
-  The DRY principle is a rule that we need to avoid and try not to repeat implementation in our code. Every piece of logic must have a single and unique representation in our code.
-* YAGNI ( You Aren't Gonna Need It )
-  YAGNI is a principle that is very closely connected to refactoring. It sets a rule that when coding, we need to add code when we need it, not if we think we are going to need it. Together with other principles and practices such as continuous refactoring this principle can help us build and improve our code over time.
-* KISS ( Keep It Simple Stupid )
-  This principle states that code works best when kept to its simplest form. Always try and find the simplest solution that could work and meet the requirements. Unnecessary complexity and features should be avoided. This makes our code more readable, understandable, and maintainable.
+## Async/Await🔹
 
-### Extra Resources 🎁
+We can always write Tasks manually and use them to make some code asynchronous. But there is another even more clean and organized way of writing asynchronous code. It's with Async/Await. Async is used for making methods asynchronous. These methods can then be executed as asynchronous code. Async methods go hand in hand with Tasks. So every async method must return a task to work. This task can be just a task or a task with a value that we can wait and then use. To wait at some point for an async method to finish or return some value we use await. Await can only be used in an async method as well.
 
-#### Articles
+### Example of a method that does work and an ad method that shows in the meantime
 
-* [Solid Principles Made Easy](https://medium.com/@dhkelmendi/solid-principles-made-easy-67b1246bcdf)
-* [CodeProject - C# Best Practices](https://www.codeproject.com/Articles/118853/Some-Best-Practices-for-C-Application-Developmen)
-* [Microsoft Guide To Coding Conventions](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/inside-a-program/coding-conventions)
+```csharp
+public static async Task SendMessageAsync(string message)
+{
+    Console.WriteLine("Sending message...");
+    await Task.Run(() => // for making sync with async add await here
+    {
+        Thread.Sleep(7000);
+        Console.WriteLine($"The message {message} was sent!");
+    });
+}
 
-#### Code Maze SOLID Series
+public static void ShowAd(string product)
+{
+    Console.WriteLine("While you wait let us show you an ad:");
+    Console.Write("Buy the best product in the world ");
+    Console.ForegroundColor = ConsoleColor.DarkCyan;
+    Console.Write(product);
+    Console.ResetColor();
+    Console.Write(" now and get ");
+    Console.ForegroundColor = ConsoleColor.Green;
+    Console.Write("FREE");
+    Console.ResetColor();
+    Console.WriteLine(" shipping worldwide!");
+    Console.ReadLine();
+}
 
-* [Single Responsibility Principle](https://code-maze.com/single-responsibility-principle/)
-* [Open-Closed Principle](https://code-maze.com/open-closed-principle/)
-* [Liskov Substitution Principle](https://code-maze.com/liskov-substitution-principle/)
-* [Interface Segregation Principle](https://code-maze.com/interface-segregation-principle/)
-* [Dependency Inversion Principle](https://code-maze.com/dependency-inversion-principle/)
+var task = SendMessageAsync("Hey there SEDC students!");
+ShowAd("Potato");
+Console.WriteLine(task.Status); // Check what the status of the task that returned
+```
 
-#### Videos
+## Extra Materials 📘
 
-* [Tim Corey Videos on SOLID](https://www.youtube.com/watch?v=5RwhyZnVRS8&list=PLLWMQd6PeGY3ob0Ga6vn1czFZfW6e-FLr)
-* [SOLID in JavaScript in 10 min](https://www.youtube.com/watch?v=GtZtQ2VFweA)
-* [Write Clean Code with Mosh](https://www.youtube.com/watch?v=5koPpYVa020)
+* [Advanced working with threads](https://www.infoworld.com/article/3035134/how-to-work-with-threads-in-c.html)
+* [Microsoft - Task based asynchronous programming](https://docs.microsoft.com/en-us/dotnet/standard/parallel-programming/task-based-asynchronous-programming)
+* [A great article for async/await in C#](https://medium.com/@kayamuhammet/understanding-async-await-in-c-aef956d72e5a)
