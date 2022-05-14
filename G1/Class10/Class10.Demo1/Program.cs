@@ -23,7 +23,7 @@ void CreateFile(string path)
     }
 }
 
-//Pinter 
+//Pointer 
 
 static void TestMethod()
 {
@@ -104,7 +104,6 @@ static void ReadFromFileSafeCustomImpl(string filePath)
 
 //method call code
 #endregion
-
 
 #region Main
 //create folder
