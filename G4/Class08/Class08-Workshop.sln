@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Class08-Workshop.Domain", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Class08-Workshop.Repository", "Class08-Workshop.Repository\Class08-Workshop.Repository.csproj", "{6F70E28D-220A-4A34-8B51-2F0DB00EC5D2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Class08-Workshop.Services", "Class08-Workshop.Services\Class08-Workshop.Services.csproj", "{BC7C704C-47B5-4263-A8B1-F004731107E8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{6F70E28D-220A-4A34-8B51-2F0DB00EC5D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6F70E28D-220A-4A34-8B51-2F0DB00EC5D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6F70E28D-220A-4A34-8B51-2F0DB00EC5D2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BC7C704C-47B5-4263-A8B1-F004731107E8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BC7C704C-47B5-4263-A8B1-F004731107E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BC7C704C-47B5-4263-A8B1-F004731107E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BC7C704C-47B5-4263-A8B1-F004731107E8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

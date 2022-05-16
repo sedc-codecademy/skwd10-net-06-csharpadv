@@ -1,4 +1,4 @@
-﻿namespace Class05_Workshop.Domain
+﻿namespace Class08_Workshop.Domain
 {
     /// <summary>
     /// Base entity implementation for inheritance of all entities
@@ -23,11 +23,5 @@
         /// </summary>
         /// <returns>The Id that will be assigned to a newly created entity.</returns>
         protected abstract int GetNextEntityId();
-
-        /// <summary>
-        /// This should print the current entity instance. Do specific implementation for
-        /// each type of entity.
-        /// </summary>
-        public abstract void Print();
     }
 }

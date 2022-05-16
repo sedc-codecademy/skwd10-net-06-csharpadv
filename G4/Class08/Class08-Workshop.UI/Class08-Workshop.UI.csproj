@@ -1,14 +1,13 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>net5.0</TargetFramework>
-    <RootNamespace>Class05_Workshop.UI</RootNamespace>
+    <RootNamespace>Class08_Workshop.UI</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Class08-Workshop.Domain\Class08-Workshop.Domain.csproj" />
-    <ProjectReference Include="..\Class08-Workshop.Repository\Class08-Workshop.Repository.csproj" />
+    <ProjectReference Include="..\Class08-Workshop.Services\Class08-Workshop.Services.csproj" />
   </ItemGroup>
 
 </Project>

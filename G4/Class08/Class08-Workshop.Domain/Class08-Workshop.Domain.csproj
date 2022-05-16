@@ -1,8 +1,8 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
-    <RootNamespace>Class05_Workshop.Domain</RootNamespace>
+    <RootNamespace>Class08_Workshop.Domain</RootNamespace>
   </PropertyGroup>
 
 </Project>

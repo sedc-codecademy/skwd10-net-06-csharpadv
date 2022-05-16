@@ -1,5 +1,6 @@
-﻿namespace Class05_Workshop.Repository
+﻿namespace Class08_Workshop.Repository
 {
+    using System;
     using System.Collections.Generic;
     using Domain;
 
@@ -16,6 +17,34 @@
         public List<T> GetAll();
 
         /// <summary>
+        /// Returns filtered entities based on specified filter.
+        /// </summary>
+        /// <param name="filter">The filter criteria.</param>
+        /// <returns>List of filtered entities.</returns>
+        public List<T> Filter(Func<T, bool> filter);
+
+        /// <summary>
+        /// Finds a single entity by its id.
+        /// </summary>
+        /// <param name="id">The entity id.</param>
+        /// <returns>The entity with the specified id if it exists, otherwise <c>null</c>.</returns>
+        public T FindById(int id);
+
+        /// <summary>
+        /// Find a single entity based on a custom filter.
+        /// </summary>
+        /// <param name="filter">The filter criteria.</param>
+        /// <returns>The filtered entity if it exists, otherwise <c>null</c>.</returns>
+        public T Find(Func<T, bool> filter);
+
+        /// <summary>
+        /// Checks if an entity that satisfies filter criteria exists.
+        /// </summary>
+        /// <param name="filter">The filter criteria.</param>
+        /// <returns><c>true</c> if such entity exists, otherwise <c>false</c>.</returns>
+        public bool Exists(Func<T, bool> filter);
+
+        /// <summary>
         /// Inserts a single entity in the repository.
         /// </summary>
         /// <param name="entity">Entity to be inserted.</param>
@@ -28,8 +57,16 @@
         public void InsertMany(List<T> entities);
 
         /// <summary>
-        /// Prints all entities in the repository.
+        /// Updates a single existing entity, decided by the provided <paramref name="entity"/>'s id.
+        /// If the entity does not already exists, does nothing.
         /// </summary>
-        public void PrintAll();
+        /// <param name="entity">The entity to be updated.</param>
+        public void Update(T entity);
+
+        /// <summary>
+        /// Deletes a single entity by its id. If an entity with the given id does not exist, does nothing.
+        /// </summary>
+        /// <param name="id">The id of the entity to be deleted.</param>
+        public void Delete(int id);
     }
 }

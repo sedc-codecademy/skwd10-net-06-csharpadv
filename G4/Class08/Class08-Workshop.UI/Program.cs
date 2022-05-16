@@ -1,26 +1,297 @@
 ﻿using System;
 
-namespace Class05_Workshop.UI
+namespace Class08_Workshop.UI
 {
     using System.Collections.Generic;
+    using System.Linq;
     using Domain;
     using Repository;
+    using Services;
+    using Services.Interfaces;
 
     class Program
     {
-        /// <summary>
-        /// Stores the user name of logged in user.
-        /// </summary>
-        private static string _loggedInUser;
+        private static ICarService _carService;
+        private static IDriverService _driverService;
+        private static IUserService _userService;
+        private static ISeedService<Car> _carSeedService;
+        private static ISeedService<Driver> _driverSeedService;
+        private static ISeedService<User> _userSeedService;
+
+        static Program()
+        {
+            // initialize repositories
+            IGenericRepository<Car> carRepository = new InMemoryGenericRepository<Car>();
+            IGenericRepository<Driver> driverRepository = new InMemoryGenericRepository<Driver>();
+            IGenericRepository<User> userRepository = new InMemoryGenericRepository<User>();
+
+            // initialize services
+            _carService = new CarService(carRepository);
+            _driverService = new DriverService(driverRepository, carRepository);
+            _userService = new UserService(userRepository);
+
+            // initialize seed services
+            _carSeedService = (ISeedService<Car>)_carService;
+            _driverSeedService = (ISeedService<Driver>)_driverService;
+            _userSeedService = (ISeedService<User>)_userService;
+        }
 
         static void Main(string[] args)
         {
-            // initialize repositories
-            ICarRepository carRepository = new CarRepository();
-            IDriverRepository driverRepository = new DriverRepository();
-            IUserRepository userRepository = new UserRepository();
 
-            // insert a few cars
+            SeedCarsAndDrivers();
+            SeedUsers();
+
+            // repeat menus until user chooses to exit
+            while (true)
+            {
+                // while user is not logged in
+                while (_userService.CurrentUser == null)
+                {
+                    var choice = MenuHelpers.GetWelcomeMenuChoice();
+
+                    switch (choice)
+                    {
+                        case WelcomeMenuChoice.LogIn:
+                            var userName = MenuHelpers.ReadUserName();
+                            var password = MenuHelpers.ReadPassword();
+
+                            // try to login
+                            var loginResult = _userService.LogIn(userName, password);
+
+                            // if login failed
+                            if (!loginResult)
+                            {
+                                Console.WriteLine("Invalid login info!");
+                            }
+                            // otherwise
+                            else
+                            {
+                                Console.WriteLine($"Successfully logged in as {_userService.CurrentUser.UserName}!");
+                            }
+
+                            break;
+
+                        case WelcomeMenuChoice.Exit:
+                            return;
+                    }
+
+                    ClearConsole();
+                }
+
+                // once user is logged in, show logged in menu
+                while (_userService.CurrentUser != null)
+                {
+                    var choice = MenuHelpers.GetLoggedInMenuChoiceForUser(_userService.CurrentUser);
+
+                    switch (choice)
+                    {
+                        case LoggedInMenuChoice.NewUser:
+                            string userName = MenuHelpers.ReadUserName();
+                            string password = MenuHelpers.ReadPassword();
+                            string passwordConfirmation = MenuHelpers.ReadPasswordConfirmation(password);
+                            Role role = MenuHelpers.ReadUserRole();
+
+                            // if everything goes through, insert the new user in the repository
+                            bool registerResult = _userService.Register(userName, password, passwordConfirmation, role);
+
+                            // if registration failed
+                            if (!registerResult)
+                            {
+                                Console.WriteLine("Registration failed!");
+                            }
+                            // otherwise
+                            else
+                            {
+                                Console.WriteLine($"Successfully registered user {userName}!");
+                            }
+
+                            break;
+
+                        case LoggedInMenuChoice.TerminateUser:
+                            List<User> availableUsersForTermination = _userService.GetUsers();
+
+                            var userIdToBeTerminated = MenuHelpers.ReadUserId(availableUsersForTermination);
+
+                            bool userDeleted = _userService.TerminateUser(userIdToBeTerminated);
+
+                            // if user deletion failed
+                            if (!userDeleted)
+                            {
+                                Console.WriteLine("User termination failed!");
+                            }
+                            // otherwise
+                            else
+                            {
+                                Console.WriteLine($"User with id {userIdToBeTerminated} terminated!");
+                            }
+
+                            break;
+
+                        case LoggedInMenuChoice.ListAllVehicles:
+
+                            var operationalOnly = MenuHelpers.GetListVehiclesOperationalOnly();
+
+                            var carsToBeListed = _carService.GetAllVehicles(operationalOnly);
+
+                            carsToBeListed.Print();
+
+                            break;
+
+                        case LoggedInMenuChoice.LicensePlateStatus:
+
+                            List<Car> carToListLicensePlateStatusFor = _carService.GetAllVehicles();
+
+                            carToListLicensePlateStatusFor.PrintLicensePlateExpiryStatuses();
+                            break;
+
+                        case LoggedInMenuChoice.ListAllDrivers:
+                            List<Driver> driversToBeListed = _driverService.GetAllDrivers();
+
+                            driversToBeListed.Print();
+                            break;
+
+                        case LoggedInMenuChoice.TaxiLicenseStatus:
+                            List<Driver> driversToListLicenseStatusFor = _driverService.GetAllDrivers();
+
+                            driversToListLicenseStatusFor.PrintTaxiLicenseExpiryStatuses();
+                            break;
+
+                        case LoggedInMenuChoice.DriverManager:
+                            ManageDriversMenuChoice manageDriversMenuChoice = MenuHelpers.GetManageDriversMenuChoice();
+
+                            switch (manageDriversMenuChoice)
+                            {
+                                case ManageDriversMenuChoice.AssignDriver:
+                                    List<Driver> availableDrivers = _driverService.GetAvailableDrivers();
+
+                                    // if no available drivers, no point in doing assignment
+                                    if (!availableDrivers.Any())
+                                    {
+                                        Console.WriteLine("No available drivers, cannot continue");
+                                        break;
+                                    }
+
+                                    int driverIdToBeAssigned = MenuHelpers.GetDriverId(availableDrivers);
+                                    Shift shift = MenuHelpers.GetDriverShiftUserInput();
+
+                                    List<Car> availableCars = _carService.GetAvailableVehiclesForShift(shift);
+
+                                    // if there are no available cars for chosen shift, no point to do assignment
+                                    if (!availableCars.Any())
+                                    {
+                                        Console.WriteLine($"No available cars available for {shift} shift, cannot continue");
+                                        break;
+                                    }
+
+                                    int carIdToBeAssignedTo = MenuHelpers.GetCarIdUserInput(availableCars);
+
+                                    bool assignResult = _driverService.AssignDriverToCar(driverIdToBeAssigned, carIdToBeAssignedTo);
+
+                                    // if assignment fails
+                                    if (!assignResult)
+                                    {
+                                        Console.WriteLine("Driver assignment failed!");
+                                    }
+                                    // otherwise
+                                    else
+                                    {
+                                        Console.WriteLine(
+                                            $"Successfully assigned driver with id {driverIdToBeAssigned} to car with id {carIdToBeAssignedTo} with {shift} shift!");
+                                    }
+
+                                    break;
+                                case ManageDriversMenuChoice.UnassignDriver:
+                                    List<Driver> assignedDrivers = _driverService.GetAssignedDrivers();
+                                    
+                                    // if there are no assigned drivers, no point in doing unassignment
+                                    if (!assignedDrivers.Any())
+                                    {
+                                        Console.WriteLine("No assigned drivers, cannot continue");
+                                        break;
+                                    }
+
+                                    int driverIdToBeUnassigned = MenuHelpers.GetDriverId(assignedDrivers);
+
+                                    bool unassignResult = _driverService.UnassignDriver(driverIdToBeUnassigned);
+
+                                    // if unassignment fails
+                                    if (!unassignResult)
+                                    {
+                                        Console.WriteLine("Unassign driver failed!");
+                                    }
+                                    // otherwise
+                                    else
+                                    {
+                                        Console.WriteLine($"Unassignment of driver with id {driverIdToBeUnassigned} is successful!");
+                                    }
+
+                                    break;
+                            }
+
+                            break;
+
+                        case LoggedInMenuChoice.ChangePassword:
+                            string oldPassword = MenuHelpers.ReadPassword(PasswordInputType.Old);
+                            string newPassword = MenuHelpers.ReadPassword(PasswordInputType.New);
+                            passwordConfirmation =
+                                MenuHelpers.ReadPasswordConfirmation(newPassword);
+
+                            bool changePasswordResult = _userService.ChangePassword(oldPassword, newPassword, passwordConfirmation);
+
+                            // if change password fails
+                            if (!changePasswordResult)
+                            {
+                                Console.WriteLine("Change password failed!");
+                            }
+                            // otherwise
+                            else
+                            {
+                                Console.WriteLine("Successfully changed password!");
+                            }
+
+                            break;
+
+                        case LoggedInMenuChoice.Exit:
+                            // return from Main = exit application
+                            return;
+
+                        case LoggedInMenuChoice.BackToMainMenu:
+                            // unassign _userService.CurrentUser = no logged in user
+                            _userService.LogOut();
+                            break;
+                    }
+
+                    ClearConsole();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Helper method that aggregates seeding of users.
+        /// </summary>
+        private static void SeedUsers()
+        {
+            User adminUser = new User("admin", "admin", Role.Administrator);
+            User managerUser = new User("manager", "manager", Role.Manager);
+            User maintenanceUser = new User("maintenance", "maintenance", Role.Maintenance);
+
+            List<User> users = new List<User>
+            {
+                adminUser,
+                managerUser,
+                maintenanceUser
+            };
+
+            _userSeedService.Seed(users);
+        }
+
+        /// <summary>
+        /// Helper method that aggregates seeding of cars and drivers.
+        /// </summary>
+        private static void SeedCarsAndDrivers()
+        {
+            // insert a few assigned cars
             var bmwCar = new Car("BMW", "123456", DateTime.Now.AddMonths(6));
             var teslaCar = new Car("Tesla", "45342432", DateTime.Now.AddYears(1));
             var golfCar = new Car("Golf", "48324983", DateTime.Now.AddYears(-1));
@@ -29,187 +300,41 @@ namespace Class05_Workshop.UI
             {
                 bmwCar,
                 teslaCar,
-                golfCar
+                golfCar,
+                new Car("Fiat", "271368", DateTime.Now.AddMonths(4)),
+                new Car("Renault" , "636781", DateTime.Today.AddYears(1))
             };
 
-            carRepository.InsertMany(cars);
+            _carSeedService.Seed(cars);
 
-            // insert a few drivers
-            var driver01 = new Driver("John", "Doe", Shift.Morning);
-            var driver02 = new Driver("Mary", "Jane", Shift.AfterNoon);
-            var driver03 = new Driver("Elon", "Musk", Shift.Evening);
+            // insert a few assigned drivers
+            var driverJohn = new Driver("John", "Doe", Shift.Morning, "123456", DateTime.Now.AddMonths(1));
+            var driverMary = new Driver("Mary", "Jane", Shift.AfterNoon, "324432", DateTime.Now.AddMonths(4));
+            var driverElon = new Driver("Elon", "Musk", Shift.Evening, "291873", DateTime.Now.AddMonths(-1));
 
             var drivers = new List<Driver>
             {
-                driver01,
-                driver02,
-                driver03
+                driverJohn,
+                driverMary,
+                driverElon,
+                new Driver("Jill", "Valentine", Shift.Morning, "928381", DateTime.Now.AddMonths(3)),
+                new Driver("Spike", "Spiegel", Shift.AfterNoon, "123993", DateTime.Now.AddMonths(4)),
+                new Driver("Jet", "Black", Shift.Evening, "129837", DateTime.Now.AddYears(1))
             };
 
             // assign some cars to the drivers (not really affecting anything)
-            driver01.AssignCar(bmwCar);
-            driver01.AssignCar(golfCar);
-            driver02.AssignCar(bmwCar);
-            driver02.AssignCar(teslaCar);
-            driver02.AssignCar(golfCar);
-            driver03.AssignCar(teslaCar);
+            driverJohn.AssignCar(bmwCar);
+            driverJohn.AssignCar(golfCar);
+            driverMary.AssignCar(bmwCar);
+            driverMary.AssignCar(teslaCar);
+            driverMary.AssignCar(golfCar);
+            driverElon.AssignCar(teslaCar);
 
-            driverRepository.InsertMany(drivers);
-
-            // consider pre-inserting some "built-in" users as well so you can
-            // skip the "Register" step
-
-            while (true)
-            {
-                // print landing menu
-                Console.WriteLine("Welcome guest!");
-                Console.WriteLine("~~~~~~~~~~~~~~");
-                Console.WriteLine("1) Log in");
-                Console.WriteLine("2) Register");
-
-                var guestInput = Console.ReadLine();
-
-                switch (guestInput)
-                {
-                    // Log in was chosen
-                    case "1":
-                        // while we don't have the user name of the logged in user
-                        while (string.IsNullOrWhiteSpace(_loggedInUser))
-                        {
-                            _loggedInUser = userRepository.LogIn();
-
-                            // if login attempt produced a valid user name
-                            if (!string.IsNullOrWhiteSpace(_loggedInUser))
-                            {
-                                Console.WriteLine($"Successfully logged in as {_loggedInUser}!");
-                            }
-                        }
-
-                        ClearConsole();
-
-                        // while we have a user logged in (_loggedInUser is not null or empty)
-                        while (!string.IsNullOrWhiteSpace(_loggedInUser))
-                        {
-                            // show logged in user menu and record whether logout was requested
-                            bool shouldLogOut = HandleLoggedInUser(carRepository, driverRepository);
-
-                            if (shouldLogOut)
-                            {
-                                Console.WriteLine($"Successfully logged out user {_loggedInUser}!");
-
-                                // clear logged out user
-                                _loggedInUser = null;
-                            }
-
-                            ClearConsole();
-                        }
-
-                        break;
-
-                    // Register was chosen
-                    case "2":
-                        // show register menu and capture the user name of the newly
-                        // registered user so we can display it below
-                        var registeredUser = userRepository.Register();
-
-                        Console.WriteLine($"Successfully registered user {registeredUser}!");
-
-                        ClearConsole();
-
-                        break;
-                    // choice was not valid
-                    default:
-                        Console.WriteLine("Invalid input, try again");
-                        continue;
-                }
-            }
+            _driverSeedService.Seed(drivers);
         }
 
         /// <summary>
-        /// Method to handle operations after an user has been logged in.
-        /// </summary>
-        /// <param name="carRepository">The car repository instance where car info will be fetched from.</param>
-        /// <param name="driverRepository">The driver repository instance where driver info will be fetched from.</param>
-        /// <returns>If user requested to log out <c>true</c>; otherwise <c>false</c>.</returns>
-        private static bool HandleLoggedInUser(ICarRepository carRepository, IDriverRepository driverRepository)
-        {
-            Console.WriteLine($"Welcome, {_loggedInUser}!");
-            Console.WriteLine("What do you want to do today?");
-            Console.WriteLine("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-            Console.WriteLine("1) Check car licenses expiry");
-            Console.WriteLine("2) List all vehicles");
-            Console.WriteLine("3) List all drivers");
-            Console.WriteLine();
-            Console.WriteLine("4) Log out");
-
-            var loggedInUserInput = Console.ReadLine();
-
-            switch (loggedInUserInput)
-            {
-                // Check car licenses expiry was chosen
-                case "1":
-                    Console.WriteLine("Car license expiry statuses:");
-                    Console.WriteLine("~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-                    carRepository.CheckLicenses();
-                    break;
-                // List all vehicles was chosen
-                case "2":
-                    // helper variable to control the while loop when prompting user
-                    // for the type of vehicles that need to be displayed
-                    bool carsListed = false;
-                    
-                    while (!carsListed)
-                    {
-                        Console.WriteLine("Do you want to list only operational vehicles? (Y/n)");
-                        var operationalOnlyInput = Console.ReadLine();
-
-                        switch (operationalOnlyInput)
-                        {
-                            // show only operational cars
-                            case "y":
-                            case "Y":
-                                Console.WriteLine("Operational cars list:");
-                                Console.WriteLine("~~~~~~~~~~~~~~~~~~~~~~");
-                                carRepository.ListAllCars(true);
-                                carsListed = true;
-                                break;
-                            // show all cars
-                            case "n":
-                            case "N":
-                                Console.WriteLine("All cars list:");
-                                Console.WriteLine("~~~~~~~~~~~~~~");
-                                carRepository.ListAllCars(false);
-                                carsListed = true;
-                                break;
-                            // invalid input
-                            default:
-                                Console.WriteLine("Invalid input, try again");
-                                carsListed = false;
-                                continue;
-                        }
-                    }
-
-                    break;
-                // List all drivers was chosen
-                case "3":
-                    Console.WriteLine("Driver list:");
-                    Console.WriteLine("~~~~~~~~~~~~");
-                    driverRepository.PrintAll();
-                    break;
-                // Log out was chosen, return true to signal that user
-                // was logged out
-                case "4":
-                    return true;
-                default:
-                    Console.WriteLine("Invalid input, try again");
-                    break;
-            }
-
-            return false;
-        }
-
-        /// <summary>
-        /// Clears console output after a key has been pressed.
+        /// Clears Console output after a key has been pressed.
         /// </summary>
         private static void ClearConsole()
         {
