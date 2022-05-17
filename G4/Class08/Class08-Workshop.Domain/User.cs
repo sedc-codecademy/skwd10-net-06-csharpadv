@@ -1,5 +1,7 @@
-﻿namespace Class05_Workshop.Domain
+﻿namespace Class08_Workshop.Domain
 {
+    using System;
+
     /// <summary>
     /// <see cref="User"/> entity.
     /// </summary>
@@ -15,7 +17,7 @@
         private static int s_lastEntityId = 0;
         
         public string UserName { get; }
-        public string Password { get; }
+        public string Password { get; private set; }
         public Role Role { get; }
 
         /// <summary>
@@ -27,6 +29,12 @@
         /// <param name="role">Role of the created user.</param>
         public User(string userName, string password, Role role)
         {
+            if (string.IsNullOrWhiteSpace(userName))
+                throw new ArgumentException("Parameter cannot be empty", nameof(userName));
+
+            if (string.IsNullOrWhiteSpace(password))
+                throw new ArgumentException("Parameter cannot be empty", nameof(password));
+
             UserName = userName;
             Password = password;
             Role = role;
@@ -37,9 +45,34 @@
             return ++s_lastEntityId;
         }
 
-        public override void Print()
+        /// <summary>
+        /// Changes user existing password. Does basic validation according to common sense/business requirements.
+        /// Detailed validation about password requirements is done in the service layer.
+        /// </summary>
+        /// <param name="oldPassword">Old password for verification.</param>
+        /// <param name="newPassword">Password that existing password will be switched to.</param>
+        /// <param name="passwordConfirmation">Confirmation of new password.</param>
+        /// <returns></returns>
+        public bool ChangePassword(string oldPassword, string newPassword, string passwordConfirmation)
         {
-            throw new System.NotImplementedException();
+            if (Password != oldPassword)
+            {
+                return false;
+            }
+
+            if (oldPassword == newPassword)
+            {
+                return false;
+            }
+
+            if (newPassword != passwordConfirmation)
+            {
+                return false;
+            }
+
+            Password = newPassword;
+
+            return true;
         }
     }
 

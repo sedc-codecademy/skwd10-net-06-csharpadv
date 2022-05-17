@@ -1,6 +1,7 @@
-﻿namespace Class05_Workshop.Domain
+﻿namespace Class08_Workshop.Domain
 {
     using System;
+    using System.Linq;
 
     /// <summary>
     /// <see cref="Driver"/> entity.
@@ -19,20 +20,44 @@
         public string FirstName { get; }
         public string LastName { get; }
         public Shift Shift { get; }
+        public string TaxiLicenseNumber { get; }
         public Car Car { get; private set; }
 
         /// <summary>
         /// Checks if driver has a valid license.
         /// </summary>
-        public bool HasValidLicense
+        public TaxiLicenseExpiryStatus TaxiLicenseExpiryStatus
         {
             get
             {
-                return LicenseExpiryDate > DateTime.Now;
+                if (TaxiLicenseExpiryDate > DateTime.Now)
+                {
+                    return TaxiLicenseExpiryDate.AddMonths(3) > DateTime.Now
+                        ? TaxiLicenseExpiryStatus.Valid
+                        : TaxiLicenseExpiryStatus.Warning;
+                }
+
+                return TaxiLicenseExpiryStatus.Expired;
             }
         }
 
-        public DateTime LicenseExpiryDate { get; }
+        public bool IsAvailable
+        {
+            get
+            {
+                return TaxiLicenseExpiryStatus != TaxiLicenseExpiryStatus.Expired && Car == null;
+            }
+        }
+
+        public bool IsAssigned
+        {
+            get
+            {
+                return Car != null;
+            }
+        }
+
+        public DateTime TaxiLicenseExpiryDate { get; }
 
         /// <summary>
         /// Creates a new <see cref="Driver"/> instance.
@@ -41,21 +66,29 @@
         /// <param name="firstName">Driver's first name.</param>
         /// <param name="lastName">Driver's last name</param>
         /// <param name="shift">Driver's working shift.</param>
-        public Driver(string firstName, string lastName, Shift shift)
+        /// <param name="taxiLicenseNumber">Driver's taxi license number.</param>
+        /// <param name="taxiLicenseExpiryDate">Driver's taxi license expiry date.</param>
+        public Driver(string firstName, string lastName, Shift shift, string taxiLicenseNumber, DateTime taxiLicenseExpiryDate)
         {
+            if (string.IsNullOrWhiteSpace(firstName))
+                throw new ArgumentException("Parameter cannot be empty", nameof(firstName));
+
+            if (string.IsNullOrWhiteSpace(lastName))
+                throw new ArgumentException("Parameter cannot be empty", nameof(lastName));
+
+            if (string.IsNullOrWhiteSpace(taxiLicenseNumber))
+                throw new ArgumentException("Parameter cannot be empty", nameof(taxiLicenseNumber));
+
             FirstName = firstName;
             LastName = lastName;
             Shift = shift;
+            TaxiLicenseNumber = taxiLicenseNumber;
+            TaxiLicenseExpiryDate = taxiLicenseExpiryDate;
         }
 
         protected override int GetNextEntityId()
         {
             return ++s_lastEntityId;
-        }
-
-        public override void Print()
-        {
-            throw new NotImplementedException();
         }
 
         /// <summary>
@@ -64,13 +97,36 @@
         /// an "unintuitive" way to connect drivers with cars.
         /// </summary>
         /// <param name="car"><see cref="Car"/> instance to be assigned to a driver.</param>
-        public void AssignCar(Car car)
+        /// <returns><c>true</c> if assignment is successful; otherwise <c>false</c>.</returns>
+        public bool AssignCar(Car car)
         {
+            if (car.AssignedDrivers.Any(driver => driver.Shift == Shift))
+                return false;
+
             // set driver's car
             Car = car;
 
             // also set the driver as an AssignedDriver to the Car instance
-            car.AssignedDrivers.Add(this);
+            Car.AssignedDrivers.Add(this);
+
+            return true;
+        }
+
+        /// <summary>
+        /// Unassigns assigned car from driver. Makes sure that the assigned car instance's
+        /// <see cref="Class08_Workshop.Domain.Car.AssignedDrivers"/> is updated as well.
+        /// </summary>
+        /// <returns><c>true</c> if unassignment is successful; otherwise <c>false</c>.</returns>
+        public bool UnassignCar()
+        {
+            if (!Car.AssignedDrivers.Contains(this))
+                return false;
+
+            Car.AssignedDrivers.Remove(this);
+
+            Car = null;
+
+            return true;
         }
     }
 
@@ -79,8 +135,18 @@
     /// </summary>
     public enum Shift
     {
-        Morning,
+        Morning = 1,
         AfterNoon,
         Evening
+    }
+
+    /// <summary>
+    /// Taxi license expiry statuses. Will be used when "prettifying" output.
+    /// </summary>
+    public enum TaxiLicenseExpiryStatus
+    {
+        Valid = 1,
+        Warning,
+        Expired
     }
 }
