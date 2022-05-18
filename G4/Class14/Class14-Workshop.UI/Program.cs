@@ -21,9 +21,9 @@ namespace Class14_Workshop.UI
         static Program()
         {
             // initialize repositories
-            IGenericRepository<Car> carRepository = new FileSystemGenericRepository<Car>();
-            IGenericRepository<Driver> driverRepository = new FileSystemGenericRepository<Driver>();
-            IGenericRepository<User> userRepository = new FileSystemGenericRepository<User>();
+            IGenericRepository<Car> carRepository = new InMemoryGenericRepository<Car>();
+            IGenericRepository<Driver> driverRepository = new InMemoryGenericRepository<Driver>();
+            IGenericRepository<User> userRepository = new InMemoryGenericRepository<User>();
 
             // initialize services
             _carService = new CarService(carRepository);
@@ -305,8 +305,6 @@ namespace Class14_Workshop.UI
                 new Car("Renault" , "636781", DateTime.Today.AddYears(1))
             };
 
-            _carSeedService.Seed(cars);
-
             // insert a few assigned drivers
             var driverJohn = new Driver("John", "Doe", "123456", DateTime.Now.AddMonths(1));
             var driverMary = new Driver("Mary", "Jane", "324432", DateTime.Now.AddMonths(4));
@@ -327,6 +325,7 @@ namespace Class14_Workshop.UI
             driverMary.AssignCar(golfCar, Shift.AfterNoon);
             driverElon.AssignCar(teslaCar, Shift.Evening);
 
+            _carSeedService.Seed(cars);
             _driverSeedService.Seed(drivers);
         }
 
