@@ -63,7 +63,10 @@ string lastName = Console.ReadLine();
 Console.Write("Age: ");
 int age = int.Parse(Console.ReadLine());
 Student newStudent = new Student(firstName, lastName, age);
-studentDb.Insert(newStudent);
+int newStudentId = studentDb.Insert(newStudent);
+Student? createdStudent = studentDb.GetById(newStudentId);
+Console.WriteLine("Following student was created:");
+Console.WriteLine(createdStudent.Info());
 Console.WriteLine("======== STUDENT CREATED ==========");
 
 Console.WriteLine("=========== STUDENTS LIST ===========");
