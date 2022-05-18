@@ -186,7 +186,7 @@ namespace Class08_Workshop.UI
 
                                     int carIdToBeAssignedTo = MenuHelpers.GetCarIdUserInput(availableCars);
 
-                                    bool assignResult = _driverService.AssignDriverToCar(driverIdToBeAssigned, carIdToBeAssignedTo);
+                                    bool assignResult = _driverService.AssignDriverToCar(driverIdToBeAssigned, carIdToBeAssignedTo, shift);
 
                                     // if assignment fails
                                     if (!assignResult)
@@ -308,27 +308,24 @@ namespace Class08_Workshop.UI
             _carSeedService.Seed(cars);
 
             // insert a few assigned drivers
-            var driverJohn = new Driver("John", "Doe", Shift.Morning, "123456", DateTime.Now.AddMonths(1));
-            var driverMary = new Driver("Mary", "Jane", Shift.AfterNoon, "324432", DateTime.Now.AddMonths(4));
-            var driverElon = new Driver("Elon", "Musk", Shift.Evening, "291873", DateTime.Now.AddMonths(-1));
+            var driverJohn = new Driver("John", "Doe", "123456", DateTime.Now.AddMonths(1));
+            var driverMary = new Driver("Mary", "Jane", "324432", DateTime.Now.AddMonths(4));
+            var driverElon = new Driver("Elon", "Musk", "291873", DateTime.Now.AddMonths(-1));
 
             var drivers = new List<Driver>
             {
                 driverJohn,
                 driverMary,
                 driverElon,
-                new Driver("Jill", "Valentine", Shift.Morning, "928381", DateTime.Now.AddMonths(3)),
-                new Driver("Spike", "Spiegel", Shift.AfterNoon, "123993", DateTime.Now.AddMonths(4)),
-                new Driver("Jet", "Black", Shift.Evening, "129837", DateTime.Now.AddYears(1))
+                new Driver("Jill", "Valentine", "928381", DateTime.Now.AddMonths(3)),
+                new Driver("Spike", "Spiegel", "123993", DateTime.Now.AddMonths(4)),
+                new Driver("Jet", "Black", "129837", DateTime.Now.AddYears(1))
             };
 
             // assign some cars to the drivers (not really affecting anything)
-            driverJohn.AssignCar(bmwCar);
-            driverJohn.AssignCar(golfCar);
-            driverMary.AssignCar(bmwCar);
-            driverMary.AssignCar(teslaCar);
-            driverMary.AssignCar(golfCar);
-            driverElon.AssignCar(teslaCar);
+            driverJohn.AssignCar(bmwCar, Shift.Morning);
+            driverMary.AssignCar(golfCar, Shift.AfterNoon);
+            driverElon.AssignCar(teslaCar, Shift.Evening);
 
             _driverSeedService.Seed(drivers);
         }

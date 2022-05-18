@@ -19,7 +19,7 @@
         
         public string FirstName { get; }
         public string LastName { get; }
-        public Shift Shift { get; }
+        public Shift? Shift { get; private set; }
         public string TaxiLicenseNumber { get; }
         public Car Car { get; private set; }
 
@@ -68,7 +68,7 @@
         /// <param name="shift">Driver's working shift.</param>
         /// <param name="taxiLicenseNumber">Driver's taxi license number.</param>
         /// <param name="taxiLicenseExpiryDate">Driver's taxi license expiry date.</param>
-        public Driver(string firstName, string lastName, Shift shift, string taxiLicenseNumber, DateTime taxiLicenseExpiryDate)
+        public Driver(string firstName, string lastName, string taxiLicenseNumber, DateTime taxiLicenseExpiryDate)
         {
             if (string.IsNullOrWhiteSpace(firstName))
                 throw new ArgumentException("Parameter cannot be empty", nameof(firstName));
@@ -81,7 +81,6 @@
 
             FirstName = firstName;
             LastName = lastName;
-            Shift = shift;
             TaxiLicenseNumber = taxiLicenseNumber;
             TaxiLicenseExpiryDate = taxiLicenseExpiryDate;
         }
@@ -97,11 +96,15 @@
         /// an "unintuitive" way to connect drivers with cars.
         /// </summary>
         /// <param name="car"><see cref="Car"/> instance to be assigned to a driver.</param>
+        /// <param name="shift">The shift the driver to be assigned to.</param>
         /// <returns><c>true</c> if assignment is successful; otherwise <c>false</c>.</returns>
-        public bool AssignCar(Car car)
+        public bool AssignCar(Car car, Shift shift)
         {
-            if (car.AssignedDrivers.Any(driver => driver.Shift == Shift))
+            if (car.AssignedDrivers.Any(driver => driver.Shift == shift))
                 return false;
+
+            // set driver's shift
+            Shift = shift;
 
             // set driver's car
             Car = car;
