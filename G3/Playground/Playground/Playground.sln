@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WinFormsApp1", "WinFormsApp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Equality", "Equality\Equality.csproj", "{2E4302AA-9673-4695-BD02-ABF1D45557BA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BuildingStrings", "BuildingStrings\BuildingStrings.csproj", "{E5C45162-50AC-473E-A35B-1B173E2D39A3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BuildingStrings", "BuildingStrings\BuildingStrings.csproj", "{E5C45162-50AC-473E-A35B-1B173E2D39A3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
