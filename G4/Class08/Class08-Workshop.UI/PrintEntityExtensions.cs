@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Text;
     using Domain;
 
     /// <summary>
@@ -53,8 +54,19 @@
 
             foreach (var driver in drivers)
             {
-                Console.WriteLine(
-                    $"{driver.Id}) {driver.FirstName} {driver.LastName} Driving in the {driver.Shift} shift with { (driver.Car != null ? $"a {driver.Car.Model} car" : "no assigned car")}");
+                var sbDriverInfo = new StringBuilder();
+                sbDriverInfo.Append($"{driver.Id}) {driver.FirstName} {driver.LastName} ");
+
+                if (driver.Car != null && driver.Shift.HasValue)
+                {
+                    sbDriverInfo.Append($"Driving in the {driver.Shift.Value} shift with a {driver.Car.Model} car");
+                }
+                else
+                {
+                    sbDriverInfo.Append("with no assigned car");
+                }
+
+                Console.WriteLine(sbDriverInfo.ToString());
             }
         }
 
