@@ -8,5 +8,11 @@
         {
             Id = -1;
         }
+
+        public BaseEntity(int id)
+        {
+            Id = id;
+        }
     }
 }
+ 
