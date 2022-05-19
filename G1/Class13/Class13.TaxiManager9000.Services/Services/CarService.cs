@@ -6,6 +6,13 @@ namespace Class13.TaxiManager9000.Services.Services
 {
     public class CarService : BaseService<Car>, ICarService
     {
+        public bool AssignDriver(Driver driver, Car car)
+        {
+            car.AssignedDrivers.Add(driver);
+            _db.Update(car);
+            return true;
+        }
+
         public List<Car> GetAvailableCarsInShift(Shift shift)
         {
             List<Car> cars = _db.GetAll().Where(x => x.LicensePlateExpieryDate > DateTime.Now

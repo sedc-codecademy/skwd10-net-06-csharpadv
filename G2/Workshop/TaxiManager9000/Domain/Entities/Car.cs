@@ -1,4 +1,6 @@
-﻿namespace TaxiManager9000.Domain.Entities
+﻿using Newtonsoft.Json;
+
+namespace TaxiManager9000.Domain.Entities
 {
     public class Car : BaseEntity
     {
@@ -19,7 +21,8 @@
             AssignedDrivers = new List<Driver>();
         }
 
-        public Car(string model, string licensePlate, DateTime licensePlateExpiryDate, List<Driver> assignedDrivers)
+        [JsonConstructor]
+        public Car(int id, string model, string licensePlate, DateTime licensePlateExpiryDate, List<Driver> assignedDrivers) : base(id)
         {
             Model = model;
             LicensePlate = licensePlate;
@@ -35,6 +38,16 @@
 
 
             return ((anyAfternoonShiftDrivers + anyMorningShiftDrivers + anyEveningShiftDrivers) / 3) * 100m;
+        }
+
+        public void AssignDrivers(params Driver[] drivers)
+        {
+            AssignedDrivers.AddRange(drivers);
+        }
+
+        public void UnAssignDriver(Driver driver)
+        {
+            AssignedDrivers = AssignedDrivers.Where(x => x.Id != driver.Id).ToList();
         }
     }
 }

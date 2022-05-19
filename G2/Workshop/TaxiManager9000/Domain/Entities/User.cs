@@ -1,4 +1,5 @@
-﻿using TaxiManager9000.Domain.Enums;
+﻿using Newtonsoft.Json;
+using TaxiManager9000.Domain.Enums;
 
 namespace TaxiManager9000.Domain.Entities
 {
@@ -34,6 +35,22 @@ namespace TaxiManager9000.Domain.Entities
             Role = role;
         }
 
+
+        /// <summary>
+        /// Constructor used for serialization/deserialization. We do not validate password here because 
+        /// we assume that if it was saved to the database, it is correct
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="userName"></param>
+        /// <param name="password"></param>
+        /// <param name="role"></param>
+        [JsonConstructor]
+        public User(int id, string userName, string password, Role role) : base(id)
+        {
+            UserName = userName;
+            Password = password;
+            Role = role;
+        }
         public void SetPassword(string password)
         {
             ValidatePassword(password);

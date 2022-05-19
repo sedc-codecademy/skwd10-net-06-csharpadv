@@ -5,12 +5,12 @@ namespace TaxiManager9000.Services.Interfaces
 {
     public interface IAdminService
     {
-        void AddUser(string userName, string password, Role role);
+        Task AddUserAsync(string userName, string password, Role role);
 
-        void TerminateUser(string userName);
+        Task TerminateUserAsync(string userName);
 
         List<User> ListAllUsers();
 
-        void ChangePassword(string userName, string password, string newPassword);
+        Task ChangePasswordAsync(string userName, string password, string newPassword);
     }
 }

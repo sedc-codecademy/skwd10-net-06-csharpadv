@@ -9,6 +9,7 @@ ICarService carService = new CarService();
 IDriverService driverService = new DriverService();
 IUserService userService = new UserService();
 IUIService uiService = new UIService();
+ILogger logger = new Logger();
 
 InitializeStartingData();
 #endregion
@@ -27,6 +28,7 @@ while (true)
         }
         catch (Exception ex)
         {
+            logger.Log("Error", ex.Message, ex.StackTrace, "not logged in");
             ConsoleHelper.WriteLine(ex.Message, ConsoleColor.Red);
             continue;
         }
@@ -136,7 +138,7 @@ while (true)
                     if (driverManagerChoice == 1)
                     {
                         var availableForAssigningDrivers = availableDrivers
-                            .Where(x => x.Car == null)
+                            .Where(x => x.CarId == null)
                             .ToList();
                         int assigningDrvierChoice = uiService
                             .ChooseEntityMenu<Driver>(availableForAssigningDrivers);
@@ -153,11 +155,14 @@ while (true)
                             availableForAssigningDrivers[assigningDrvierChoice - 1],
                             availableCarsForAssigning[assigningCarChoice - 1]
                             );
+                        carService.AssignDriver(availableForAssigningDrivers[assigningDrvierChoice - 1],
+                            availableCarsForAssigning[assigningCarChoice - 1]
+                            );
                     }
                     else if (driverManagerChoice == 2)
                     {
                         var availableForUnassigningDrivers = availableDrivers
-                            .Where(x => x.Car != null)
+                            .Where(x => x.CarId != null)
                             .ToList();
                         var unassigningDrvierChoice = uiService
                             .ChooseEntityMenu<Driver>(availableForUnassigningDrivers);
@@ -168,9 +173,11 @@ while (true)
                     break;
                 }
             case MenuOptions.ListAllCars:
-                carService.GetAll().ForEach(x => Console.WriteLine(x.Print()));
-                Console.ReadLine();
-                break;
+                {
+                    carService.GetAll().ForEach(x => Console.WriteLine(x.Print()));
+                    Console.ReadLine();
+                    break;
+                }
             case MenuOptions.LicensePlateStatus:
                 {
                     foreach (var car in carService.GetAll())
@@ -233,13 +240,13 @@ void InitializeStartingData()
     carService.Seed(seedCars);
 
     Driver driver1 = new Driver("Romario", "Walsh", Shift.NoShift, null, "LC12456123", new DateTime(2023, 11, 5));
-    Driver driver2 = new Driver("Kathleen", "Rankin", Shift.Morning, car1, "LC54435234", new DateTime(2022, 1, 12));
-    Driver driver3 = new Driver("Ashanti", "Mooney", Shift.Evening, car1, "LC65803245", new DateTime(2022, 5, 19));
-    Driver driver4 = new Driver("Zakk", "Hook", Shift.Afternoon, car1, "LC20897583", new DateTime(2023, 9, 28));
+    Driver driver2 = new Driver("Kathleen", "Rankin", Shift.Morning, car1.Id, "LC54435234", new DateTime(2022, 1, 12));
+    Driver driver3 = new Driver("Ashanti", "Mooney", Shift.Evening, car1.Id, "LC65803245", new DateTime(2022, 5, 19));
+    Driver driver4 = new Driver("Zakk", "Hook", Shift.Afternoon, car1.Id, "LC20897583", new DateTime(2023, 9, 28));
     Driver driver5 = new Driver("Xavier", "Kelly", Shift.NoShift, null, "LC15636280", new DateTime(2024, 6, 1));
-    Driver driver6 = new Driver("Joy", "Shelton", Shift.Evening, car2, "LC47845611", new DateTime(2023, 7, 3));
-    Driver driver7 = new Driver("Kristy", "Riddle", Shift.Morning, car3, "LC19006543", new DateTime(2024, 6, 12));
-    Driver driver8 = new Driver("Stuart", "Mayer", Shift.Evening, car3, "LC53187767", new DateTime(2023, 10, 10));
+    Driver driver6 = new Driver("Joy", "Shelton", Shift.Evening, car2.Id, "LC47845611", new DateTime(2023, 7, 3));
+    Driver driver7 = new Driver("Kristy", "Riddle", Shift.Morning, car3.Id, "LC19006543", new DateTime(2024, 6, 12));
+    Driver driver8 = new Driver("Stuart", "Mayer", Shift.Evening, car3.Id, "LC53187767", new DateTime(2023, 10, 10));
     List<Driver> seedDrivers = new List<Driver>() { driver1, driver2, driver3, driver4, driver5, driver6, driver7, driver8 };
     driverService.Seed(seedDrivers);
 }

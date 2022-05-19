@@ -11,7 +11,7 @@ namespace Class13.TaxiManager9000.Services.Services
 
         public BaseService()
         {
-            _db = new LocalDb<T>();
+            _db = new FileSystemDb<T>();
         }
         public bool Add(T entity)
         {
@@ -48,7 +48,12 @@ namespace Class13.TaxiManager9000.Services.Services
 
         public void Seed(List<T> items)
         {
-            if (_db.GetAll().Count > 0) return;
+            List<T> data = _db.GetAll();
+            if (data != null && data.Count > 0)
+            {
+                return;
+            }
+
             items.ForEach(x => _db.Add(x));
         }
     }
