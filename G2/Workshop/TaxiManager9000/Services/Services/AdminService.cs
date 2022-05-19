@@ -16,7 +16,7 @@ namespace TaxiManager9000.Services
             _database = DependencyResolver.GetService<IUserDatabase>();
         }
 
-        public void AddUser(string userName, string password, Role role)
+        public async Task AddUserAsync(string userName, string password, Role role)
         {
             User user = new User(userName, password, role);
 
@@ -27,7 +27,7 @@ namespace TaxiManager9000.Services
                 throw new AlreadyExistsException($"The user already exists");
             }
 
-            _database.Insert(user);
+            await _database.InsertAsync(user);
         }
 
         public List<User> ListAllUsers()
@@ -37,7 +37,7 @@ namespace TaxiManager9000.Services
             return users;
         }
 
-        public void ChangePassword(string userName, string password, string newPassword)
+        public async Task ChangePasswordAsync(string userName, string password, string newPassword)
         {
             User existingUser = _database.GetByUserNameAndPassword(userName, password);
 
@@ -48,10 +48,10 @@ namespace TaxiManager9000.Services
 
             existingUser.SetPassword(newPassword);
 
-            _database.Update(existingUser);
+            await _database.UpdateAsync(existingUser);
         }
 
-        public void TerminateUser(string userName)
+        public async Task TerminateUserAsync(string userName)
         {
             User existingUser = _database.GetByUserName(userName);
 
@@ -60,7 +60,7 @@ namespace TaxiManager9000.Services
                 throw new NotFoundException($"The user {userName} doesnt exist");
             }
 
-            _database.Remove(existingUser);
+            await _database.RemoveAsync(existingUser);
         }
     }
 }

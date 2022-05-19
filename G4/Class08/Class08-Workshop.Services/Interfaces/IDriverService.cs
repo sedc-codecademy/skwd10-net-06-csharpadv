@@ -24,13 +24,15 @@
         /// </summary>
         /// <returns>List of assigned drivers.</returns>
         List<Driver> GetAssignedDrivers();
+
         /// <summary>
         /// Assigns the driver with the provided driver id to the car with the provided car id.
         /// </summary>
         /// <param name="driverId">The driver id.</param>
         /// <param name="carId">The car id.</param>
+        /// <param name="shift">The shift to assign the driver to.</param>
         /// <returns><c>true</c> if assignment was successful; otherwise <c>false</c>.</returns>
-        bool AssignDriverToCar(int driverId, int carId);
+        bool AssignDriverToCar(int driverId, int carId, Shift shift);
         /// <summary>
         /// Unassigns the driver with the provided driver id from his/hers assigned car, making
         /// the car available.

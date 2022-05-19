@@ -2,7 +2,7 @@
 
 namespace TaxiManager9000.DataAccess.Interface
 {
-    public interface IUserDatabase : IDatabase<User>
+    public interface IUserDatabase : IFileDatabase<User>
     {
         User GetByUserNameAndPassword(string username, string password);
         

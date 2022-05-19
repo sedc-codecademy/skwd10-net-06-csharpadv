@@ -39,7 +39,7 @@
             return Repository.Filter(driver => driver.IsAssigned);
         }
 
-        public bool AssignDriverToCar(int driverId, int carId)
+        public bool AssignDriverToCar(int driverId, int carId, Shift shift)
         {
             Driver driverToBeAssigned = Repository.FindById(driverId);
 
@@ -55,7 +55,12 @@
                 return false;
             }
 
-            driverToBeAssigned.AssignCar(carToAssignDriverTo);
+            bool assignResult = driverToBeAssigned.AssignCar(carToAssignDriverTo, shift);
+
+            if (!assignResult)
+            {
+                return false;
+            }
 
             Repository.Update(driverToBeAssigned);
             _carRepository.Update(carToAssignDriverTo);
