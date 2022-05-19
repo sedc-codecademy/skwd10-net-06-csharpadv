@@ -7,6 +7,8 @@ namespace Class13.TaxiManager9000.Services.Interfaces
     {
         bool IsAvailableCar(Car car);
         void Seed(List<Car> seedCars);
+
+        bool AssignDriver(Driver driver, Car car);
         List<Car> GetAvailableCarsInShift(Shift shift);
     }
 }

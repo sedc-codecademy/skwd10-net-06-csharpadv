@@ -1,0 +1,54 @@
+[
+  {
+    "Model": "Auris (Toyota)",
+    "LicensePlate": "AFW950",
+    "LicensePlateExpieryDate": "2023-12-01T00:00:00",
+    "AssignedDrivers": [],
+    "Id": 7
+  },
+  {
+    "Model": "Auris (Toyota)",
+    "LicensePlate": "CKE480",
+    "LicensePlateExpieryDate": "2021-10-15T00:00:00",
+    "AssignedDrivers": [],
+    "Id": 8
+  },
+  {
+    "Model": "Transporter (Volkswagen)",
+    "LicensePlate": "GZDR69",
+    "LicensePlateExpieryDate": "2024-05-30T00:00:00",
+    "AssignedDrivers": [],
+    "Id": 9
+  },
+  {
+    "Model": "Mondeo (Ford)",
+    "LicensePlate": "5RIP283",
+    "LicensePlateExpieryDate": "2022-05-13T00:00:00",
+    "AssignedDrivers": [],
+    "Id": 10
+  },
+  {
+    "Model": "Premier (Peugeot)",
+    "LicensePlate": "2AR9907",
+    "LicensePlateExpieryDate": "2022-11-09T00:00:00",
+    "AssignedDrivers": [],
+    "Id": 11
+  },
+  {
+    "Model": "Vito (Mercedes)",
+    "LicensePlate": "6RND294",
+    "LicensePlateExpieryDate": "2023-03-11T00:00:00",
+    "AssignedDrivers": [
+      {
+        "Firstname": "Zakk",
+        "Lastname": "Hook",
+        "CarId": 12,
+        "Shift": 2,
+        "License": "LC20897583",
+        "LicenseExpieryDate": "2023-09-28T00:00:00",
+        "Id": 4
+      }
+    ],
+    "Id": 12
+  }
+]

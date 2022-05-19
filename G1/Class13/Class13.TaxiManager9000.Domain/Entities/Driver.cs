@@ -6,25 +6,24 @@ namespace Class13.TaxiManager9000.Domain.Entities
     {
         public string Firstname { get; set; }
         public string Lastname { get; set; }
-        public Car? Car { get; set; }
+        public int? CarId { get; set; }
 
         public Shift Shift { get; set; }
         public string License { get; set; }
         public DateTime LicenseExpieryDate { get; set; }
 
-        public Driver(string firstname, string lastname, Shift shift, Car car, string license, DateTime licenseExpieryDate)
+        public Driver(string firstname, string lastname, Shift shift, int? carId, string license, DateTime licenseExpieryDate)
         {
             Firstname = firstname;
             Lastname = lastname;
-            Car = car;
+            CarId = carId;
             Shift = shift;
             License = license;
             LicenseExpieryDate = licenseExpieryDate;
         }
         public override string Print()
         {
-            string model = Car == null ? "/" : Car.Model;
-            return $"{Id}){Firstname} {Lastname} Driving in the {Shift} shift with a {model} car";
+            return $"{Id}){Firstname} {Lastname} Driving in the {Shift} shift.";
         }
 
         public ExpieryStatus IsLicenseExpired()
