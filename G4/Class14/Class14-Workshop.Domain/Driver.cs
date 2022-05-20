@@ -2,25 +2,54 @@
 {
     using System;
     using System.Linq;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Serialization;
 
     /// <summary>
     /// <see cref="Driver"/> entity.
     /// </summary>
-    public class Driver : BaseEntity 
+    public class Driver : BaseEntity
     {
         /// <summary>
         /// Static field to keep track on what was the last assigned
         /// Id for <see cref="Driver"/>, so we are able to calculate the
         /// next one when creating a new instance (see <see cref="BaseEntity"/>
-        /// constructor in combination with <see cref="BaseEntity.GetNextEntityId"/>
-        /// on how this works).
+        /// constructor on how this works).
         /// </summary>
         private static int s_lastEntityId = 0;
-        
+
+        private static Func<int> s_customIdFactory;
+
+        /// <summary>
+        /// Allows customizing Id generation for <see cref="Driver"/> entity.
+        ///
+        /// It can be set only once, because it employs the "singleton pattern".
+        /// Should be set in a static context before the application actually starts running (e.g. static constructor).
+        /// </summary>
+        public static Func<int> CustomIdFactory
+        {
+            get => s_customIdFactory;
+            set
+            {
+                if (s_customIdFactory == null)
+                {
+                    s_customIdFactory = value;
+                }
+            }
+        }
+
         public string FirstName { get; }
         public string LastName { get; }
+        [JsonProperty]
         public Shift? Shift { get; private set; }
         public string TaxiLicenseNumber { get; }
+
+        /// <summary>
+        /// Needs the <see cref="JsonProperty"/> attribute with <see cref="JsonProperty.ReferenceLoopHandling"/> == <see cref="ReferenceLoopHandling.Ignore"/>
+        /// to avoid issues with circular dependencies. The <see cref="JsonProperty.IsReference"/> is an optimization for Newtonsoft.Json to try to restore
+        /// object reference data when deserializing entities.
+        /// </summary>
+        [JsonProperty(ReferenceLoopHandling = ReferenceLoopHandling.Ignore, IsReference = true)]
         public Car Car { get; private set; }
 
         /// <summary>
@@ -41,34 +70,37 @@
             }
         }
 
+        /// <summary>
+        /// Checks if driver is available.
+        /// </summary>
         public bool IsAvailable
         {
-            get
-            {
-                return TaxiLicenseExpiryStatus != TaxiLicenseExpiryStatus.Expired && Car == null;
-            }
+            get { return TaxiLicenseExpiryStatus != TaxiLicenseExpiryStatus.Expired && Car == null; }
         }
 
+        /// <summary>
+        /// Checks if driver is assigned.
+        /// </summary>
         public bool IsAssigned
         {
-            get
-            {
-                return Car != null;
-            }
+            get { return Car != null; }
         }
 
         public DateTime TaxiLicenseExpiryDate { get; }
 
         /// <summary>
-        /// Creates a new <see cref="Driver"/> instance.
-        /// Invokes <see cref="BaseEntity"/> default constructor.
+        /// Private constructor to allow setting of the Id property (used by <see cref="CreateForSeed"/> method.
+        /// It is marked with [<see cref="JsonConstructorAttribute"/>] so we force Newtonsoft.Json to use this constructor
+        /// when deserializing the entity.
         /// </summary>
+        /// <param name="id">The Id of the driver.</param>
         /// <param name="firstName">Driver's first name.</param>
         /// <param name="lastName">Driver's last name</param>
-        /// <param name="shift">Driver's working shift.</param>
         /// <param name="taxiLicenseNumber">Driver's taxi license number.</param>
         /// <param name="taxiLicenseExpiryDate">Driver's taxi license expiry date.</param>
-        public Driver(string firstName, string lastName, string taxiLicenseNumber, DateTime taxiLicenseExpiryDate)
+        [JsonConstructor]
+        private Driver(int id, string firstName, string lastName, string taxiLicenseNumber,
+            DateTime taxiLicenseExpiryDate) : base(id)
         {
             if (string.IsNullOrWhiteSpace(firstName))
                 throw new ArgumentException("Parameter cannot be empty", nameof(firstName));
@@ -85,9 +117,36 @@
             TaxiLicenseExpiryDate = taxiLicenseExpiryDate;
         }
 
-        protected override int GetNextEntityId()
+        /// <summary>
+        /// Creates a new <see cref="Driver"/> instance.
+        /// Invokes <see cref="BaseEntity"/> default constructor.
+        /// </summary>
+        /// <param name="firstName">Driver's first name.</param>
+        /// <param name="lastName">Driver's last name</param>
+        /// <param name="taxiLicenseNumber">Driver's taxi license number.</param>
+        /// <param name="taxiLicenseExpiryDate">Driver's taxi license expiry date.</param>
+        public Driver(string firstName, string lastName, string taxiLicenseNumber, DateTime taxiLicenseExpiryDate) :
+            this(0, firstName, lastName, taxiLicenseNumber, taxiLicenseExpiryDate)
         {
-            return ++s_lastEntityId;
+
+        }
+
+        /// <summary>
+        /// Static factory method for usage when seeding entities. This is needed because auto-generating Ids for
+        /// existing entities in a persistent database will re-insert the same entities with new auto-generated Ids.
+        ///
+        /// This allows restoring of Ids of seeded data when trying to reinsert them.
+        /// </summary>
+        /// <param name="id">The Id of the driver.</param>
+        /// <param name="firstName">Driver's first name.</param>
+        /// <param name="lastName">Driver's last name</param>
+        /// <param name="taxiLicenseNumber">Driver's taxi license number.</param>
+        /// <param name="taxiLicenseExpiryDate">Driver's taxi license expiry date.</param>
+        /// <returns>A new <see cref="Driver"/> instance that can be seeded.</returns>
+        public static Driver CreateForSeed(int id, string firstName, string lastName, string taxiLicenseNumber,
+            DateTime taxiLicenseExpiryDate)
+        {
+            return new Driver(id, firstName, lastName, taxiLicenseNumber, taxiLicenseExpiryDate);
         }
 
         /// <summary>
@@ -130,6 +189,16 @@
             Car = null;
 
             return true;
+        }
+
+        protected override int GetNextEntityId()
+        {
+            if (CustomIdFactory != null)
+            {
+                return CustomIdFactory();
+            }
+
+            return ++s_lastEntityId;
         }
     }
 

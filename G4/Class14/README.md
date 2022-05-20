@@ -61,7 +61,7 @@ A taxi company wants an app that can manage their taxi cars and drivers. This ap
       * Red text: Creation unsuccessful. Please try again -> Restart the New User Section
       * Green text: Successful creation of an [Role] user! -> Redirects to Main Menu
   * [Admin] Terminate User
-    * Create a new user for the app:
+    * Remove a user from the app:
       * Shows all users to pick:
       * Removes the chosen option
   * [Maintenance] List all vehicles -> Lists All Vehicles

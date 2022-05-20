@@ -21,9 +21,9 @@ namespace Class14_Workshop.UI
         static Program()
         {
             // initialize repositories
-            IGenericRepository<Car> carRepository = new InMemoryGenericRepository<Car>();
-            IGenericRepository<Driver> driverRepository = new InMemoryGenericRepository<Driver>();
-            IGenericRepository<User> userRepository = new InMemoryGenericRepository<User>();
+            IGenericRepository<Car> carRepository = new FileSystemGenericRepository<Car>(provider => Car.CustomIdFactory = provider.GetNextId);
+            IGenericRepository<Driver> driverRepository = new FileSystemGenericRepository<Driver>(provider => Driver.CustomIdFactory = provider.GetNextId);
+            IGenericRepository<User> userRepository = new FileSystemGenericRepository<User>(provider => User.CustomIdFactory = provider.GetNextId);
 
             // initialize services
             _carService = new CarService(carRepository);
@@ -62,12 +62,12 @@ namespace Class14_Workshop.UI
                             // if login failed
                             if (!loginResult)
                             {
-                                Console.WriteLine("Invalid login info!");
+                                ColorWriter.WriteLine("Login unsuccessful. Please try again", TextColor.Red);
                             }
                             // otherwise
                             else
                             {
-                                Console.WriteLine($"Successfully logged in as {_userService.CurrentUser.UserName}!");
+                                ColorWriter.WriteLine($"Successful Login! Welcome {_userService.CurrentUser.Role} user!", TextColor.Green);
                             }
 
                             break;
@@ -98,12 +98,12 @@ namespace Class14_Workshop.UI
                             // if registration failed
                             if (!registerResult)
                             {
-                                Console.WriteLine("Registration failed!");
+                                ColorWriter.WriteLine("Creation unsuccessful. Please try again", TextColor.Red);
                             }
                             // otherwise
                             else
                             {
-                                Console.WriteLine($"Successfully registered user {userName}!");
+                                ColorWriter.WriteLine($"Successful creation of an {role} user!", TextColor.Green);
                             }
 
                             break;
@@ -203,7 +203,7 @@ namespace Class14_Workshop.UI
                                     break;
                                 case ManageDriversMenuChoice.UnassignDriver:
                                     List<Driver> assignedDrivers = _driverService.GetAssignedDrivers();
-                                    
+
                                     // if there are no assigned drivers, no point in doing unassignment
                                     if (!assignedDrivers.Any())
                                     {
@@ -242,12 +242,12 @@ namespace Class14_Workshop.UI
                             // if change password fails
                             if (!changePasswordResult)
                             {
-                                Console.WriteLine("Change password failed!");
+                                ColorWriter.WriteLine("Password change unsuccessful. Please try again", TextColor.Red);
                             }
                             // otherwise
                             else
                             {
-                                Console.WriteLine("Successfully changed password!");
+                                ColorWriter.WriteLine("Successful change password!", TextColor.Green);
                             }
 
                             break;
@@ -272,9 +272,9 @@ namespace Class14_Workshop.UI
         /// </summary>
         private static void SeedUsers()
         {
-            User adminUser = new User("admin", "admin", Role.Administrator);
-            User managerUser = new User("manager", "manager", Role.Manager);
-            User maintenanceUser = new User("maintenance", "maintenance", Role.Maintenance);
+            User adminUser = User.CreateForSeed(1, "admin", "admin", Role.Administrator);
+            User managerUser = User.CreateForSeed(2, "manager", "manager", Role.Manager);
+            User maintenanceUser = User.CreateForSeed(3, "maintenance", "maintenance", Role.Maintenance);
 
             List<User> users = new List<User>
             {
@@ -292,32 +292,32 @@ namespace Class14_Workshop.UI
         private static void SeedCarsAndDrivers()
         {
             // insert a few assigned cars
-            var bmwCar = new Car("BMW", "123456", DateTime.Now.AddMonths(6));
-            var teslaCar = new Car("Tesla", "45342432", DateTime.Now.AddYears(1));
-            var golfCar = new Car("Golf", "48324983", DateTime.Now.AddYears(-1));
+            var bmwCar = Car.CreateForSeed(1, "BMW", "123456", DateTime.Now.AddMonths(6));
+            var teslaCar = Car.CreateForSeed(2, "Tesla", "45342432", DateTime.Now.AddYears(1));
+            var golfCar = Car.CreateForSeed(3, "Golf", "48324983", DateTime.Now.AddYears(-1));
 
             var cars = new List<Car>
             {
                 bmwCar,
                 teslaCar,
                 golfCar,
-                new Car("Fiat", "271368", DateTime.Now.AddMonths(4)),
-                new Car("Renault" , "636781", DateTime.Today.AddYears(1))
+                Car.CreateForSeed(4,"Fiat", "271368", DateTime.Now.AddMonths(4)),
+                Car.CreateForSeed(5,"Renault" , "636781", DateTime.Today.AddYears(1))
             };
 
             // insert a few assigned drivers
-            var driverJohn = new Driver("John", "Doe", "123456", DateTime.Now.AddMonths(1));
-            var driverMary = new Driver("Mary", "Jane", "324432", DateTime.Now.AddMonths(4));
-            var driverElon = new Driver("Elon", "Musk", "291873", DateTime.Now.AddMonths(-1));
+            var driverJohn = Driver.CreateForSeed(1, "John", "Doe", "123456", DateTime.Now.AddMonths(1));
+            var driverMary = Driver.CreateForSeed(2, "Mary", "Jane", "324432", DateTime.Now.AddMonths(4));
+            var driverElon = Driver.CreateForSeed(3, "Elon", "Musk", "291873", DateTime.Now.AddMonths(-1));
 
             var drivers = new List<Driver>
             {
                 driverJohn,
                 driverMary,
                 driverElon,
-                new Driver("Jill", "Valentine", "928381", DateTime.Now.AddMonths(3)),
-                new Driver("Spike", "Spiegel", "123993", DateTime.Now.AddMonths(4)),
-                new Driver("Jet", "Black", "129837", DateTime.Now.AddYears(1))
+                Driver.CreateForSeed(4, "Jill", "Valentine", "928381", DateTime.Now.AddMonths(3)),
+                Driver.CreateForSeed(5, "Spike", "Spiegel", "123993", DateTime.Now.AddMonths(4)),
+                Driver.CreateForSeed(6, "Jet", "Black", "129837", DateTime.Now.AddYears(1))
             };
 
             // assign some cars to the drivers (not really affecting anything)

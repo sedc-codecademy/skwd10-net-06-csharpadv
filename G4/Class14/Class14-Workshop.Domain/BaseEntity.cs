@@ -8,9 +8,12 @@
     {
         public int Id { get; }
 
-        protected BaseEntity()
+        protected BaseEntity(int id = 0)
         {
-            Id = GetNextEntityId();
+            if (id == 0)
+                Id = GetNextEntityId();
+            else
+                Id = id;
         }
 
         /// <summary>

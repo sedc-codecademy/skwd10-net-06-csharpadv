@@ -38,8 +38,24 @@
 
             foreach (var car in cars)
             {
+                ConsoleColor statusColor = ConsoleColor.Green;
+
+                switch (car.LicensePlateExpiryStatus)
+                {
+                    case LicensePlateExpiryStatus.Valid:
+                        statusColor = ConsoleColor.Green;
+                        break;
+                    case LicensePlateExpiryStatus.Warning:
+                        statusColor = ConsoleColor.Yellow;
+                        break;
+                    case LicensePlateExpiryStatus.Expired:
+                        statusColor = ConsoleColor.Red;
+                        break;
+                }
+
+                ColorWriter.Write($"{car.LicensePlateExpiryStatus}", statusColor);
                 Console.WriteLine(
-                    $"{car.LicensePlateExpiryStatus}) Car Id {car.Id} - Plate {car.LicensePlateNumber} expiring on {car.LicensePlateExpiryDate}");
+                    $") Car Id {car.Id} - Plate {car.LicensePlateNumber} expiring on {car.LicensePlateExpiryDate}");
             }
         }
 
@@ -81,8 +97,25 @@
 
             foreach (var driver in drivers)
             {
+                TextColor textColor = TextColor.Green;
+
+                switch (driver.TaxiLicenseExpiryStatus)
+                {
+                    case TaxiLicenseExpiryStatus.Valid:
+                        textColor = TextColor.Green;
+                        break;
+                    case TaxiLicenseExpiryStatus.Warning:
+                        textColor = TextColor.Yellow;
+                        break;
+                    case TaxiLicenseExpiryStatus.Expired:
+                        textColor = TextColor.Red;
+                        break;
+                }
+
+                ColorWriter.Write($"{driver.TaxiLicenseExpiryStatus}", textColor);
+
                 Console.WriteLine(
-                    $"{driver.TaxiLicenseExpiryStatus}) Driver {driver.FirstName} {driver.LastName} with license {driver.TaxiLicenseNumber} expiring on {driver.TaxiLicenseExpiryDate}");
+                    $") Driver {driver.FirstName} {driver.LastName} with license {driver.TaxiLicenseNumber} expiring on {driver.TaxiLicenseExpiryDate}");
             }
         }
 
