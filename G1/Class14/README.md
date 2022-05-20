@@ -11,6 +11,7 @@ In order to increase efficiency and increase productivity in every team there ar
 * Method max size should not exceed more than 50 lines, if it exceed then re-factor it and separate it in 2 methods
 * Class should not contain more than 700 characters, if it is more than 700 characters than consider using of partial classes
 * Add a whitespace around operators, like +, -, ==, etc.
+* ...
 
 ## Naming
 There are three type of naming conventions generally used while doing C# programming,
