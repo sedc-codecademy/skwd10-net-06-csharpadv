@@ -2,6 +2,8 @@
 {
     public interface IDatabase<T>
     {
+        T GetById(int id);
+
         void Insert(T item);
 
         void Remove(T item);

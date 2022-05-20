@@ -8,6 +8,11 @@
 
         public int Age { get; set; }
 
+        public Student()
+        {
+
+        }
+
         public Student(string firstName, string lastName, int age)
         {
             FirstName = firstName;

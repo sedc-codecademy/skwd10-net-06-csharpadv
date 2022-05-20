@@ -8,6 +8,9 @@ namespace Class13.TaxiManager9000.Domain.Entities
         public string Password { get; set; }
         public Role Role { get; set; }
 
+        public User()
+        { }
+
         public User(string username, string password, Role role)
         {
             Username = username;

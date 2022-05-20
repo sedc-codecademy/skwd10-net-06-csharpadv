@@ -11,6 +11,9 @@ Console.WriteLine("=============================================================
 Db<Student> studentDb = new Db<Student>();
 Db<Subject> subjectDb = new Db<Subject>();
 
+CsvStudentDb csvStudentDb = new CsvStudentDb();
+CsvSubjectDb csvSubjectDb = new CsvSubjectDb();
+
 void Seed()
 {
     if(studentDb.GetAll().Count == 0)
@@ -21,6 +24,13 @@ void Seed()
         studentDb.Insert(new Student("John", "Smith", 123));
     }
 
+    if (csvStudentDb.GetAll().Count == 0)
+    {
+        Console.WriteLine("========== INSERTING DATA IN STUDENTS CSV DATABASE ===========");
+        csvStudentDb.Insert(new Student("CSV-John", "Snow", 23));
+        csvStudentDb.Insert(new Student("CSV-Jane", "Doe", 35));
+        csvStudentDb.Insert(new Student("CSV-John", "Smith", 123));
+    }
 
     if (subjectDb.GetAll().Count == 0)
     {
@@ -28,6 +38,14 @@ void Seed()
         subjectDb.Insert(new Subject("C# Advanced", Academy.Programming, 15));
         subjectDb.Insert(new Subject("Photoshop", Academy.Design, 20));
         subjectDb.Insert(new Subject("C# Basic", Academy.Programming, 12));
+    }
+
+    if (csvSubjectDb.GetAll().Count == 0)
+    {
+        Console.WriteLine("========== INSERTING DATA IN SBJECTS DATABASE ===========");
+        csvSubjectDb.Insert(new Subject("C# Advanced", Academy.Programming, 15));
+        csvSubjectDb.Insert(new Subject("Photoshop", Academy.Design, 20));
+        csvSubjectDb.Insert(new Subject("C# Basic", Academy.Programming, 12));
     }
 }
 
@@ -88,3 +106,14 @@ else
 {
     Console.WriteLine("Not sure a?");
 }
+
+Console.WriteLine("=========== STUDENTS LIST CSV ===========");
+students = csvStudentDb.GetAll();
+foreach (var student in students)
+{
+    Console.WriteLine(student.Info());
+}
+
+Console.WriteLine("=========== GET BY ID CSV ===========");
+Console.Write("Student with ID 2 is ");
+Console.WriteLine(csvStudentDb.GetById(2).Info());

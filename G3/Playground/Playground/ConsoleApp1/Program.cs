@@ -156,3 +156,15 @@ var isZero = x switch
 //    checkOne => throw new ExceptionOne(),
 //    _ => input.Trim()
 //};
+
+//-------------
+Console.WriteLine(string.Empty.PadLeft(20, '-'));
+
+StarbucksOptions flavor;
+
+//flavor = StarbucksOptions.Vanilla | StarbucksOptions.ExtraShot;
+flavor = (StarbucksOptions)12;
+
+flavor.HasFlag(StarbucksOptions.SkimMilk);
+
+Console.WriteLine(flavor);
