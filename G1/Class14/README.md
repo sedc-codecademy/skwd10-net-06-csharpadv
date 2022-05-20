@@ -52,3 +52,4 @@ As we already have seen we need to write methods for separate the code that is r
 * [Microsoft-C# Coding Conventions](https://docs.microsoft.com/en-us/dotnet/csharp/fundamentals/coding-style/coding-conventions)
 * [C#Corner-C# Coding Guidelines And Best Practices](https://www.c-sharpcorner.com/blogs/c-sharp-coding-guidelines-and-best-practices-v10)
 * [Code Project-Best Practices for C#](https://www.codeproject.com/Articles/118853/Some-Best-Practices-for-C-Application-Developmen)
+* [C#Corner-Software Design Principles DRY, KISS, YAGNI](https://www.c-sharpcorner.com/article/software-design-principles-dry-kiss-yagni/)
