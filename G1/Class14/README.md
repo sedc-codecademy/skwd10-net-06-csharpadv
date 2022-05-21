@@ -11,6 +11,7 @@ In order to increase efficiency and increase productivity in every team there ar
 * Method max size should not exceed more than 50 lines, if it exceed then re-factor it and separate it in 2 methods
 * Class should not contain more than 700 characters, if it is more than 700 characters than consider using of partial classes
 * Add a whitespace around operators, like +, -, ==, etc.
+* ...
 
 ## Naming
 There are three type of naming conventions generally used while doing C# programming,
@@ -36,13 +37,13 @@ As we already have seen we need to write methods for separate the code that is r
 * Use break if searching for a value to close the loop when data needed is found
 * Counters by convention have one letter name usually: i, j, k or i, ii, iii, etc.
 
-##If/Else statements
+## If/Else statements
 * When writing an if statement that results in bool value in any way, don't use comparison with true or false
 * Invert If statements to see if you can make else redundant
 * Don't use one-liner ifs for more than one line of code
 * For longer if/else statements try using a switch instead
 
-#Programming Principles
+# Programming Principles
 * DRY ( Don't Repeat Yourself ) The DRY principle is a rule that we need to avoid and try not to repeat implementation in our code. Every piece of logic must have a single and unique representation in our code.
 * KISS ( Keep It Simple Stupid ) This principle states that code works best when kept to its simplest form. Always try and find the simplest solution that could work and meet the requirements. Unnecessary complexity and features should be avoided. This makes our code more readable, understandable, and maintainable.
 * YAGNI ( You Aren't Gonna Need It ) YAGNI is a principle that is very closely connected to refactoring. It sets a rule that when coding, we need to add code when we need it, not if we think we are going to need it. Together with other principles and practices such as continuous refactoring this principle can help us build and improve our code over time.
