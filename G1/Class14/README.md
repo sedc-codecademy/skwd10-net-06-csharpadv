@@ -6,7 +6,7 @@ Coding conventions are a set of guidelines for a specific programming language t
 
 In order to increase efficiency and increase productivity in every team there are accepted programming practices. This programming practices help us easier to understand and modify the code that other developers write and to help us write clearer code. When it comes to good practices there are a lot that are used but the most basic ones are the following:
 * Indent your code - if you use indentations it is much easier to follow the current  scope that you are in and it is much easier to keep track of the execution flow
-* Add Comments - when you write code that is not easy to follow, so in future some other developer need to rework your code or to add additional logic to it
+* Add Comments - when you write code that is not easy to follow. So. in future when some other developer need to rework your code or to add additional logic to it it will help him to understand the code.
 * Don't use one file for more classes
 * Method max size should not exceed more than 50 lines, if it exceed then re-factor it and separate it in 2 methods
 * Class should not contain more than 700 characters, if it is more than 700 characters than consider using of partial classes
