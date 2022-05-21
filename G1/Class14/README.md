@@ -16,14 +16,19 @@ In order to increase efficiency and increase productivity in every team there ar
 ## Naming
 There are three type of naming conventions generally used while doing C# programming,
 * Pascal Convention – First character of all word is in upper case and other characters are in lower case.
+
 Example: HelloWorld
+
 Used in: Classes, Methods, Interfaces, Fields, Properties, Events, Local Functions
 
 * Camel Case Convention – The first character of all words, except the first word, is upper case and other characters are lower case.
+
 Example: helloWorld
+
 Used in: variables, private and internal fields starting with _, method parameters, 
 
 * Hungarian Case Convention – The data type as prefix is used to define the variable by developers long ago. This convention is not used anywhere now a day’s except local variable declaration.
+
 Example:string m_sName; string strName; int iAge;
 
 ## Methods
