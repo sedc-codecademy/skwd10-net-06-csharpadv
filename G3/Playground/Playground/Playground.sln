@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Equality", "Equality\Equali
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BuildingStrings", "BuildingStrings\BuildingStrings.csproj", "{E5C45162-50AC-473E-A35B-1B173E2D39A3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazoDemo", "BlazoDemo\BlazoDemo.csproj", "{C489258F-5048-4358-828B-359FF58AE115}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{E5C45162-50AC-473E-A35B-1B173E2D39A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E5C45162-50AC-473E-A35B-1B173E2D39A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E5C45162-50AC-473E-A35B-1B173E2D39A3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C489258F-5048-4358-828B-359FF58AE115}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C489258F-5048-4358-828B-359FF58AE115}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C489258F-5048-4358-828B-359FF58AE115}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C489258F-5048-4358-828B-359FF58AE115}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

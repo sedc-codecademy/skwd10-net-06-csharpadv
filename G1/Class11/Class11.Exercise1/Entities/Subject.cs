@@ -6,6 +6,8 @@
         public Academy Academy { get; set; }
         public int Classes { get; set; }
 
+        public Subject()
+        { }
         public Subject(string title, Academy academy, int classes)
         {
             Title = title;

@@ -100,13 +100,16 @@ while (true)
                 }
             case MenuOptions.ListAllDrivers:
                 {
-                    driverService.GetAll().ForEach(x => Console.WriteLine(x.Print()));
+                    var allData = driverService.GetAll();
+                    AddvertisementHelper.DiscountAdd();
+                    await allData;
+                    allData.Result.ForEach(x => Console.WriteLine(x.Print()));
                     Console.ReadLine();
                     break;
                 }
             case MenuOptions.TaxiLicenseStatus:
                 {
-                    carService.GetAll().ForEach(x =>
+                    carService.GetAll().Result.ForEach(x =>
                                 {
                                     var status = x.IsLicenseExpired();
 
@@ -174,13 +177,16 @@ while (true)
                 }
             case MenuOptions.ListAllCars:
                 {
-                    carService.GetAll().ForEach(x => Console.WriteLine(x.Print()));
+                    var taskData = carService.GetAll();
+                    AddvertisementHelper.DiscountAdd();
+                    await taskData;
+                    taskData.Result.ForEach(x => Console.WriteLine(x.Print()));
                     Console.ReadLine();
                     break;
                 }
             case MenuOptions.LicensePlateStatus:
                 {
-                    foreach (var car in carService.GetAll())
+                    foreach (var car in carService.GetAll().Result)
                     {
                         ExpieryStatus status = car.IsLicenseExpired();
                         switch (status)
