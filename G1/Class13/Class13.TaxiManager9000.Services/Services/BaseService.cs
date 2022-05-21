@@ -26,8 +26,9 @@ namespace Class13.TaxiManager9000.Services.Services
             }
         }
 
-        public List<T> GetAll()
+        public async Task<List<T>> GetAll()
         {
+            await Task.Delay(2000);
             return _db.GetAll();
         }
 
