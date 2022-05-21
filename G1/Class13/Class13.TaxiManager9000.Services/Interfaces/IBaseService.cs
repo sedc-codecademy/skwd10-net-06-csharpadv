@@ -7,7 +7,7 @@ namespace Class13.TaxiManager9000.Services.Interfaces
         bool Add(T user);
         bool Remove(int id);
         T GetById(int id);
-        List<T> GetAll();
+        Task<List<T>> GetAll();
         List<T> GetAll(Func<T, bool> wherePredicate);
     }
 }
