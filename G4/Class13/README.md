@@ -41,6 +41,9 @@ In C# as in any other language, there are some Good Practices or Invisible Rules
 * For longer if/else statements try using a switch instead
 
 ## Resources
+### General
+* [CodeProject - C# Best Practices](https://www.codeproject.com/Articles/118853/Some-Best-Practices-for-C-Application-Developmen)
+* [Microsoft Guide To Coding Conventions](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/inside-a-program/coding-conventions)
 ### Naming
 * Most Common Programming Case Types - [chaseadams.io](https://chaseadams.io/posts/most-common-programming-case-types/)
 * Case Styles: Camel, Pascal, Snake, and Kebab Case - [betterprogramming.pub](https://betterprogramming.pub/string-case-styles-camel-pascal-snake-and-kebab-case-981407998841)

@@ -12,12 +12,6 @@
         public string LastName { get; set; }
         public Shift? Shift { get; set; }
         public string TaxiLicenseNumber { get; set; }
-
-        /// <summary>
-        /// Needs the <see cref="JsonProperty"/> attribute with <see cref="JsonProperty.ReferenceLoopHandling"/> == <see cref="ReferenceLoopHandling.Ignore"/>
-        /// to avoid issues with circular dependencies. The <see cref="JsonProperty.IsReference"/> is an optimization for Newtonsoft.Json to try to restore
-        /// object reference data when deserializing entities.
-        /// </summary>
         public Car Car { get; set; }
 
         /// <summary>
@@ -61,7 +55,7 @@
         /// </summary>
         public Driver()
         {
-            
+
         }
 
         /// <summary>
