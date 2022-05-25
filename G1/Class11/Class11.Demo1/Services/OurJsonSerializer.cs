@@ -19,6 +19,15 @@ namespace Class11.Demo1.Services
         }
 
         //deserialize Student class
+        /// <summary>
+        /// Method that deserialize Student class
+        /// 1. Remove json charavters {, }, ", \n \r ...
+        /// 2. Split by , and add to properties array
+        /// 3. Split by : each item in properties array and add first item as key in dictionary and second as value in dictionary
+        /// 4. Assign items in dictionalry to accirding object propertirs
+        /// </summary>
+        /// <param name="json">Student oibject json as string</param>
+        /// <returns>Student object</returns>
         public Student DeserializeStudent(string json)
         {
             // THE PROCESS
